@@ -1,0 +1,15 @@
+<div class="app-paginator">
+   <app-icon-button icon="first_page" *ngIf="showFirstLastIcon" (click)="goToPage(0)" />
+   <app-icon-button icon="chevron_left" (click)="goToPage(pageNumber - 1)" />
+
+   @for (page of paginatorPages; track $index) {
+      <div class="paginator-page" [class.active]="page === pageNumber" (click)="goToPage(page)">
+         {{ page + 1 }}
+      </div>
+   }
+
+   <app-icon-button icon="chevron_right" (click)="goToPage(pageNumber + 1)" />
+   <app-icon-button icon="last_page" *ngIf="showFirstLastIcon" (click)="goLast()" />
+
+   <app-select [options]="rowsPerPageOptionsList" (change)="changeRowsPerPage($event)"></app-select>
+</div>

@@ -1,0 +1,104 @@
+@use './_mixins.scss' as *;
+
+.nowrap {
+   white-space: nowrap;
+}
+
+.expander {
+   flex: 1;
+}
+
+.button-group {
+   display: flex;
+   gap: 1rem;
+}
+
+.relative {
+   position: relative;
+}
+
+.tabs {
+   margin: 0;
+   padding: 0;
+   display: flex;
+   overflow-x: scroll;
+   overflow-y: hidden;
+   position: relative;
+   width: 100%;
+   margin-bottom: 2rem;
+   border-bottom: 1px solid #e0e0e0;
+
+   @include no-mobile {
+      flex-wrap: wrap;
+   }
+
+   li {
+      list-style: none;
+      padding: 0.5rem 0;
+      flex-shrink: 0;
+      display: flex;
+
+      &.active {
+         border-bottom: 2px solid black;
+         button {
+            color: var(--link-color);
+         }
+      }
+
+      button {
+         padding: 0 1rem;
+         height: 38px;
+         font-size: 1rem;
+         cursor: pointer;
+         white-space: nowrap;
+         background: transparent;
+         border: 1px solid transparent;
+         color: #666;
+
+         &:hover {
+            color: var(--link-color);
+         }
+      }
+
+      &:not(:last-child) {
+         button {
+            border-right: 1px solid #e0e0e0;
+         }
+      }
+   }
+}
+
+.cmn-page-with-title {
+   display: block;
+
+   // Mobile
+   @include mobile {
+      padding: 1rem;
+      max-width: 100%;
+   }
+
+   // Tablet
+   @include tablet {
+      padding: 2rem;
+   }
+
+   // desktop
+   @include desktop {
+      padding: 2rem 3rem 10rem 8rem;
+      max-width: 1200px;
+   }
+}
+
+.cmn-text-subtitle {
+   font-size: 11px;
+   color: var(--brand-800);
+   // padding-bottom: 8px; // When filter is hidden it's needed
+   white-space: pre-wrap; // Case #1: Fairwise > Acquisition > Create Task in mobile mode > Time description, Case#2: Av-NET > Resolve > Action comment
+
+   code {
+      background-color: var(--gray-200);
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-weight: 600;
+   }
+}

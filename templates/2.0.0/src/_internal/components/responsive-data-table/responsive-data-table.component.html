@@ -1,0 +1,39 @@
+<section [class]="'responsive-data-table_width_' + width">
+   <app-entity-card-list
+      class="section_narrow"
+      [fields]="fields"
+      [canSelect]="canSelect"
+      [items]="items"
+      (onSelectItem)="selectItem($event)"
+      [selectedItem]="selectedItem"
+      [itemActions]="itemActions"
+      (onItemAction)="onItemAction.emit($event)"
+   />
+
+   <app-data-table
+      [fields]="fields"
+      class="section_wide"
+      [canSelect]="canSelect"
+      [items]="items"
+      [selectedItem]="selectedItem"
+      [itemActions]="itemActions"
+      (onItemAction)="onItemAction.emit($event)"
+      (multiSelectionChange)="multiSelectionChange.emit($event)"
+      [service]="service"
+      [hiddenFieldsStorageKey]="hiddenFieldsStorageKey"
+      (onSelectItem)="selectItem($event)"
+      (onSort)="onSort.emit($event)"
+   />
+
+   <!-- Show More -->
+   <div class="show-more" #showMore>
+      <app-icon-button
+         *ngIf="hasMore"
+         tooltip="Show more"
+         icon="expand_circle_down"
+         size="lg"
+         color="secondary"
+         (click)="this.onShowMore.emit()"
+      />
+   </div>
+</section>

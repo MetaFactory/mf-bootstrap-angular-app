@@ -1,0 +1,56 @@
+<div class="time-picker">
+   <!-- Minutes -->
+   <div class="clock">
+      <div class="minute-section">
+         <div
+            [class.selected]="hour === selectedMinute"
+            *ngFor="let hour of hours; let i = index"
+            [ngStyle]="{
+               transform:
+                  'rotate(' +
+                  (hour * 30 + 270) +
+                  'deg) translate(150px) rotate(-' +
+                  (hour * 30 + 270) +
+                  'deg)'
+            }"
+            class="cell"
+            (click)="selectMinute(hour)"
+         >
+            {{ (hour * 5).toString().padStart(2, '0') }}
+         </div>
+      </div>
+   </div>
+
+   <!-- Hour -->
+   <div class="clock">
+      <div class="hour-section">
+         <div
+            [class.selected]="hour === selectedHour"
+            *ngFor="let hour of hours; let i = index"
+            [ngStyle]="{
+               transform:
+                  'rotate(' +
+                  (hour * 30 + 270) +
+                  'deg) translate(100px) rotate(-' +
+                  (hour * 30 + 270) +
+                  'deg)'
+            }"
+            (click)="selectHour(hour)"
+            class="cell"
+         >
+            {{ isAm ? hour : hour + 12 }}
+         </div>
+
+         <div class="center">
+            <app-icon-button
+               tooltip="Switch AM / PM"
+               [icon]="isAm ? 'light_mode' : 'dark_mode'"
+               size="xl"
+               color="gray-400"
+               [iconSize]="48"
+               (click)="toggleAmPm()"
+            />
+         </div>
+      </div>
+   </div>
+</div>

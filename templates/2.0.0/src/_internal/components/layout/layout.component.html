@@ -1,0 +1,63 @@
+<div class="main-layout" [class.show-sidebar]="showSidebar && !general$.value.collapseSidebar">
+   <app-nav [items]="general$.value.navItems" [selectedPath]="selectedNavPath" />
+   <app-toolbar [store]="store" [showSidebarIndicator]="showSidebar" />
+   <app-sidebar [items]="sidebarItems" />
+   <main>
+      <!-- main -->
+      <section class="section-main">
+         <router-outlet />
+      </section>
+
+      <!-- Laptop details -->
+      <section
+         *ngIf="!general$.value.isMobile"
+         [class]="'section-details section-details_width_' + (detailsSchema?.width || 'auto')"
+      >
+         <!-- Laptop -->
+         <app-dynamic-form
+            *ngIf="detailsSchema"
+            [schema]="detailsSchema"
+            [path]="detailsPanelPath"
+            [standalone]="false"
+            (onClose)="handleCloseDetailsPanel()"
+         />
+      </section>
+
+      <!-- Mobile details -->
+      <section
+         *ngIf="general$.value.isMobile"
+         [class]="
+            'section-details_mobile section-details_width_' + (detailsSchema?.width || 'auto')
+         "
+      >
+         <div *ngIf="detailsSchema">
+            <app-dynamic-form
+               [schema]="detailsSchema"
+               [path]="detailsPanelPath"
+               [standalone]="false"
+               (onClose)="handleCloseDetailsPanel()"
+            />
+         </div>
+      </section>
+
+      <!-- free form modal -->
+      <app-free-form-modal
+         *ngIf="freeFormModal"
+         [context]="freeFormModal"
+         (onClose)="handleCloseModal()"
+      />
+
+      <!-- Message Box -->
+      <div class="main-message-box_container" *ngIf="!!messageBox$.value">
+         <div class="main-message-box">
+            <mat-icon
+               name="close"
+               class="main-message-box_close"
+               title="Close"
+               (click)="generalService.hideMessageBox()"
+            />
+            <div class="main-message-box_message" [innerHtml]="getMessageBox()"></div>
+         </div>
+      </div>
+   </main>
+</div>

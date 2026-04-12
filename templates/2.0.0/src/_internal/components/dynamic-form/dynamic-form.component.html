@@ -1,0 +1,19 @@
+@if (service) {
+   @switch (schema.type) {
+      <!-- data table -->
+      @case ('data-table') {
+         <app-data-table-panel [formSchema]="schema" [service]="service" />
+      }
+
+      <!-- entity panel -->
+      @case ('entity-panel') {
+         <app-entity-panel
+            [formSchema]="schema"
+            [service]="service"
+            [path]="path"
+            [standalone]="standalone"
+            (onClose)="closeDetailsPage()"
+         />
+      }
+   }
+}

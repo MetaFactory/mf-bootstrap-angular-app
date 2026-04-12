@@ -1,0 +1,13 @@
+.entity-field_link {
+   display: inline-flex;
+   align-items: center;
+   gap: 4px;
+   mat-icon {
+      font-size: 16px;
+   }
+
+   a {
+      text-decoration: underline;
+      color: var(--brand-900);
+   }
+}

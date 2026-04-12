@@ -1,0 +1,154 @@
+.calendar-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem;
+   gap: 1rem;
+   border-bottom: 1px solid var(--gray-300);
+   box-sizing: border-box;
+
+   .calendar-header__month {
+      color: var(--gray-500);
+      cursor: pointer;
+      display: flex;
+
+      &:hover {
+         color: var(--brand-500);
+      }
+
+      i {
+         font-size: 1.2rem;
+         color: var(--brand-600);
+      }
+   }
+}
+
+.calendar-days__head {
+   padding: 0.5rem 1rem 0 1rem;
+   display: grid;
+   grid-template-columns: repeat(7, 1fr); /* 7 columns */
+
+   div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      font-size: 0.6rem;
+      color: var(--brand-600);
+      cursor: pointer;
+   }
+}
+
+.calendar-grid {
+   padding: 1rem;
+   display: grid;
+   min-width: 250px;
+   justify-content: center;
+   align-items: center;
+
+   div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 48px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: font-size 0.1s ease;
+
+      &.today {
+         color: var(--orange-500);
+         font-size: 1.4rem;
+      }
+
+      &:hover {
+         font-size: 2rem;
+      }
+   }
+}
+
+.calendar-days__day {
+   grid-template-columns: repeat(7, 1fr); /* 7 columns */
+   grid-template-rows: repeat(6, 1fr); /* 6 rows */
+
+   div {
+      width: 48px;
+      border-radius: 50%;
+
+      &.disabled {
+         color: var(--gray-300);
+      }
+
+      &.selected,
+      &.selected-week {
+         color: white;
+         background-color: var(--brand-500);
+      }
+
+      &.selected-week {
+         border-radius: 0;
+      }
+   }
+}
+
+.calendar-month-select {
+   display: flex;
+   flex-direction: row;
+   padding: 1rem;
+   gap: 0.5rem;
+
+   ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      li {
+         color: var(--gray-500);
+         padding: 0.7rem 0.5rem;
+         cursor: pointer;
+         text-align: left;
+         white-space: nowrap;
+         border-radius: 3px;
+         display: flex;
+         align-items: center;
+         gap: 8px;
+         &:hover {
+            background-color: var(--gray-100);
+         }
+
+         &.selected {
+            background-color: var(--brand-100);
+         }
+
+         span {
+            background-color: var(--brand-200);
+            font-size: smaller;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+         }
+      }
+   }
+
+   ul:last-child {
+      border-left: 1px solid var(--gray-300);
+      padding-left: 0.5rem;
+
+      li {
+         user-select: none;
+         width: 75px;
+         justify-content: center;
+
+         &.selected {
+            color: white;
+            background-color: var(--brand-500);
+         }
+      }
+   }
+}

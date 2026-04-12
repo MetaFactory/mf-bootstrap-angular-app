@@ -1,0 +1,15 @@
+@use '../../styles/mixins' as *;
+
+section {
+   @include no-mobile {
+      margin: 24px auto;
+      max-width: 660px;
+   }
+}
+
+.border {
+   border-radius: 8px;
+   background-color: #fff;
+   border: 1px solid rgb(218, 220, 224);
+   box-shadow: none;
+}

@@ -1,0 +1,39 @@
+<app-modal
+   [isOpen]="!!context.schema"
+   (close)="onClose.emit()"
+   [title]="context.schema?.title ?? ''"
+>
+   <div class="main-content">
+      <!-- Form Description -->
+      <div
+         class="free-form_description"
+         *ngIf="context.schema?.description"
+         [innerHtml]="context.schema?.description | markdown"
+      ></div>
+
+      <!-- Fields -->
+      <app-fields-edit-panel
+         *ngIf="context.schema"
+         (onChange)="handleChange($event)"
+         (formValidity)="handleFormValidity($event)"
+         [data]="context.state"
+         [fields]="context.schema.fields!"
+      />
+   </div>
+
+   <!-- Footer Actions -->
+   <div class="button-group footer-content" *ngIf="context.schema">
+      <app-button variant="text" (click)="onClose.emit()">Cancel</app-button>
+      @for (action of context.schema.actions; track $index) {
+         <app-button
+            [startIcon]="action.icon"
+            [disabled]="!formIsValid || this.formActionState === 'Running'"
+            color="info"
+            variant="contained"
+            (click)="processAction(action)"
+         >
+            {{ action.title }}</app-button
+         >
+      }
+   </div>
+</app-modal>

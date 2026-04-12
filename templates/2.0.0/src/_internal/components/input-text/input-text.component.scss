@@ -1,0 +1,33 @@
+div {
+   display: flex;
+   border: 1px solid var(--gray-300);
+   height: 32px;
+   border-radius: 8px;
+   flex-direction: row;
+   align-items: center;
+   box-sizing: border-box;
+   min-width: 70px;
+
+   input {
+      padding: 0 10px;
+      flex: 1;
+      border: none;
+      color: inherit;
+      outline: none;
+      background-color: transparent;
+   }
+
+   i {
+      font-size: 1.2rem;
+      color: var(--brand-600);
+      user-select: none;
+      padding: 0 0.5rem;
+      cursor: pointer;
+   }
+}
+
+::ng-deep html.dark {
+   .app-input-text input::placeholder {
+      color: var(--gray-300);
+   }
+}

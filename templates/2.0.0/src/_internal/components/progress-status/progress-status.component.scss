@@ -1,0 +1,20 @@
+a.retry-link {
+    color: var(--brand-700);
+    cursor: pointer;
+ }
+ 
+ .progress-icon {
+    animation: progress_rotate 1s linear infinite;
+    font-size: 3rem;
+    color: var(--brand-500);
+  }
+  
+  @keyframes progress_rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

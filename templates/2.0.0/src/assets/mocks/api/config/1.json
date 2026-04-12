@@ -1,0 +1,9 @@
+{
+   "id": 1,
+   "action": "ReadImporterFile",
+   "type": "Info",
+   "created": "2024/10/12 13:45",
+   "user": "Farhad",
+   "filename": "DBH540545.txt",
+   "message": "File read successfully."
+}

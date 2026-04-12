@@ -1,0 +1,17 @@
+<div [class.has-value]="hasValue" class="app-input-text" [attr.data-name]="name">
+   <input
+      [attr.name]="name"
+      [value]="value"
+      [type]="type === 'NUMBER' ? 'number' : 'text'"
+      [placeholder]="placeholder"
+      [(ngModel)]="value"
+      (blur)="blurInput($event)"
+      (ngModelChange)="setValue(value)"
+      [autocomplete]="true"
+   />
+
+   <!-- Reset Button -->
+   <i *ngIf="hasValue" class="reset-button material-symbols-outlined" (click)="resetValues($event)"
+      >close</i
+   >
+</div>

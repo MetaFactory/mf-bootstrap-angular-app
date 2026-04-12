@@ -1,0 +1,131 @@
+:host {
+   position: relative;
+}
+
+button {
+   height: 32px;
+   padding: 6px 2px 6px 10px;
+   color: var(--gray-500);
+   box-sizing: border-box;
+   white-space: nowrap;
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+   z-index: var(--z-10);
+   max-width: 100%;
+   background-color: white;
+   border: 1px solid var(--gray-300);
+   border-radius: 8px;
+
+   &:hover {
+      background-color: #0001;
+   }
+
+   i {
+      font-size: 1.2rem;
+   }
+
+   .reset-button {
+      padding: 0 0.5rem;
+   }
+
+   .select-label-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 0.85rem;
+      flex: 1;
+      text-align: left;
+   }
+}
+
+ul {
+   overflow-y: auto;
+   padding: 0.5rem 0;
+}
+
+li {
+   padding: 0.5rem 16px;
+   display: flex;
+   align-items: center;
+   color: #71717a;
+   cursor: pointer;
+   &:hover {
+      background-color: #f5f5f588;
+   }
+
+   .option-check {
+      width: 1.75rem;
+      min-width: 1.75rem;
+      color: var(--brand-900);
+   }
+
+   .label-text {
+      padding: 0.25rem 0;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+
+   .favorite {
+      display: none;
+      color: var(--brand-500);
+      &.favorite-show {
+         display: block;
+         color: var(--gray-300);
+         font-variation-settings: 'FILL' 1;
+      }
+   }
+
+   &.active {
+      background-color: #f5f5f5;
+   }
+
+   &:hover {
+      .favorite {
+         display: block;
+      }
+   }
+}
+
+.app-select-search-input {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   padding: 0 1rem;
+   border-bottom: 2px solid var(--brand-800);
+
+   input {
+      background-color: transparent;
+      border: none;
+      flex: 1;
+      line-height: 2rem;
+      padding: 0.5rem;
+      outline: none;
+
+      &.has-error {
+         color: var(--red-500);
+      }
+   }
+}
+.options-container {
+   display: flex;
+   flex-direction: column;
+}
+
+::ng-deep html.dark {
+   .app-select {
+      background-color: transparent;
+      border: 1px solid var(--gray-300);
+      color: var(--gray-300);
+   }
+}
+
+.error-message {
+   display: flex;
+   flex-direction: row;
+   gap: 0.5rem;
+   align-items: center;
+   color: var(--red-500);
+   padding: 1rem;
+}

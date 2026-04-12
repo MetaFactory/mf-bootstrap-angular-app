@@ -1,0 +1,9 @@
+<div *ngIf="status === 'in-progress'" class="progress-icon material-symbols-outlined">
+   progress_activity
+</div>
+
+<app-row *ngIf="status === 'failed'">
+   <span class="error-icon material-symbols-outlined">error</span>
+   {{ failureMessage }}
+   <a class="retry-link" (click)="retry.emit()">{{ retryMessage }}</a>
+</app-row>

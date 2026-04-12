@@ -1,0 +1,97 @@
+<ng-container [formGroup]="this.formGroup">
+   @switch (field.type) {
+      <!-- Select -->
+      @case ('SELECT') {
+         <app-select
+            placeholder="SELECT"
+            [name]="field.name"
+            [id]="field.name + '-input'"
+            [favoriteKey]="'filter-favorite-' + field.name"
+            [autoComplete]="!!field.autocomplete"
+            [resetButton]="field.required === false"
+            [formControlName]="field.name!"
+            [multi]="field.multi ?? false"
+            [options]="field.options"
+            (onOptionsSearch)="this.onOptionsSearch.emit($event)"
+            [hasError]="hasError"
+            [errorText]="errorText"
+         />
+      }
+
+      <!-- Date -->
+      @case ('DATE') {
+         <app-input-date
+            [formControlName]="field.name!"
+            [name]="field.name"
+            [id]="field.name + '-input'"
+         />
+      }
+
+      <!-- Time -->
+      @case ('TIME') {
+         <app-input-time
+            [formControlName]="field.name!"
+            [name]="field.name"
+            [id]="field.name + '-input'"
+         />
+      }
+
+      <!-- DateTime -->
+      @case ('DATE_TIME') {
+         <app-input-date
+            [formControlName]="field.name!"
+            [hasTime]="true"
+            [name]="field.name"
+            [id]="field.name + '-input'"
+         />
+      }
+
+      <!-- Boolean -->
+      @case ('BOOLEAN') {
+         <app-input-boolean
+            [formControlName]="field.name!"
+            [nullable]="!field.required"
+            [id]="field.name + '-input'"
+         />
+      }
+
+      <!-- File -->
+      @case ('FILE') {
+         <input type="file" (change)="onFileSelect($event, field)" [id]="field.name + '-input'" />
+      }
+
+      <!-- Text / Number -->
+      @default {
+         <!-- MULTI LINE TEXT -->
+         @if (field.multiline) {
+            <textarea
+               [id]="field.name + '-input'"
+               [name]="field.name"
+               [formControlName]="field.name!"
+               [value]="field.defaultValue"
+               rows="5"
+               type="text"
+               [placeholder]="getFieldTitle(field)"
+            ></textarea>
+         } @else {
+            <!-- TEXT / PASSWORD / NUMBER / TIME -->
+            <input
+               [name]="field.name"
+               [id]="field.name + '-input'"
+               [value]="field.defaultValue ?? ''"
+               [ariaAutoComplete]="field.autocomplete?.paramName"
+               [autocomplete]="field.autocomplete?.paramName"
+               [formControlName]="field.name!"
+               [type]="
+                  field.type === 'NUMBER'
+                     ? 'number'
+                     : field.type === 'PASSWORD'
+                       ? 'password'
+                       : 'text'
+               "
+               [placeholder]="field.defaultValue || ''"
+            />
+         }
+      }
+   }
+</ng-container>

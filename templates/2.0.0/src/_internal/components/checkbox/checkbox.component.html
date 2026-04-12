@@ -1,0 +1,5 @@
+<label class="custom-checkbox" (click)="setValue(!value, $event)">
+   <input type="checkbox" [attr.name]="name" [checked]="value" />
+   <mat-icon color="secondary" [name]="value ? 'check_box' : 'check_box_outline_blank'" />
+   {{ label }}
+</label>

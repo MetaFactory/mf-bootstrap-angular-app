@@ -1,0 +1,90 @@
+form {
+   display: flex;
+   flex-direction: column;
+   padding-bottom: 100px;
+   gap: 1rem;
+}
+
+.entity-edit-panel_fields-container {
+   gap: 1.5rem 2rem;
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.entity-field {
+   display: inline-flex;
+   flex-direction: column;
+   gap: 0.5rem;
+   min-width: min(100%, 450px);
+
+   .entity-field_readonly-value {
+      color: var(--brand-800);
+   }
+
+   label {
+      font-size: 16px;
+      color: var(--gray-700);
+      font-weight: 500;
+      line-height: 20px;
+      box-sizing: border-box;
+   }
+
+   .form-field_description {
+      font-size: 11px;
+      color: var(--gray-500);
+   }
+
+   &.multiline-text {
+      width: 100%;
+   }
+}
+
+ul {
+   list-style: none;
+   padding: 0;
+}
+
+.validation-message {
+   color: var(--red-500);
+   font-size: small;
+}
+
+.entity-edit-group {
+   background-color: white;
+   border-radius: 8px;
+   padding: 2rem;
+   border: 1px solid #f0f0f0;
+   min-width: 300px;
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+
+   .group-title {
+      letter-spacing: 3px;
+      font-weight: 500;
+      color: #666;
+   }
+}
+
+header {
+   position: sticky;
+   top: 0;
+   background-color: var(--gray-50);
+   z-index: var(--z-20);
+   display: flex;
+   overflow: hidden;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0.5rem 0;
+}
+
+h1 {
+   white-space: pre-wrap;
+   color: var(--gray-800);
+   font-weight: 300;
+
+   overflow: hidden;
+   text-overflow: ellipsis;
+   text-wrap: nowrap;
+}

@@ -1,0 +1,23 @@
+<aside [class.collapse]="general$.value.collapseSidebar">
+   <ul>
+      <li *ngFor="let item of items" [class]="item.css">
+         @if (item.title) {
+            <app-link [item]="item" [selectedPath]="''" />
+            <!-- @if (isExternal(item.path)) {
+               <a [href]="item.path" target="_blank">
+                  <i class="material-symbols-outlined">{{ item.icon }}</i>
+                  {{ item.translationBase ? translate.instant(item.translationBase) : item.title }}
+               </a>
+            } @else {
+               <a [routerLink]="item.path" routerLinkActive="active-link">
+                  <i class="material-symbols-outlined">{{ item.icon }}</i>
+                  {{ item.translationBase ? translate.instant(item.translationBase) : item.title }}
+               </a>
+            } -->
+         }
+         @if (item.separator) {
+            <hr />
+         }
+      </li>
+   </ul>
+</aside>

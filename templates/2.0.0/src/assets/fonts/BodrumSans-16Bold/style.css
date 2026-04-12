@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Bodrum Sans';
+    src: local('Bodrum Sans Bold'), local('Bodrum-Sans-Bold'),
+        url('BodrumSans-16Bold.woff2') format('woff2'),
+        url('BodrumSans-16Bold.woff') format('woff'),
+        url('BodrumSans-16Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }

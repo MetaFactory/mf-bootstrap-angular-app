@@ -1,0 +1,77 @@
+<button
+   #buttonRef
+   [class.has-value]="hasValue"
+   class="app-select"
+   [id]="id"
+   role="combobox"
+   (click)="toggleShowOptions()"
+   [title]="displayValue"
+>
+   <span class="select-label-text">{{ displayValue }}</span>
+   <i *ngIf="!resetButton || !hasValue" class="material-symbols-outlined">arrow_drop_down</i>
+
+   <!-- Reset Button -->
+   <i
+      *ngIf="resetButton && hasValue"
+      class="reset-button material-symbols-outlined"
+      (click)="resetValues($event)"
+      >close</i
+   >
+</button>
+
+<app-popover
+   [open]="isOptionsVisible"
+   (close)="hideOptions()"
+   [anchorRect]="inputRect"
+   [maxWidth]="maxWidth ?? config.value.components.select.defaultMaxWidth"
+   [maxHeight]="maxHeight ?? config.value.components.select.defaultMaxheight"
+>
+   <!-- Search Input -->
+   <div class="app-select-search-input">
+      <i class="material-symbols-outlined">search</i>
+      <input
+         [autofocus]="autofocus"
+         [class.has-error]="hasError"
+         #searchInput
+         type="text"
+         [attr.name]="name"
+         [tabindex]="-1"
+         [(ngModel)]="searchPhrase"
+         (ngModelChange)="onSearchChange()"
+      />
+   </div>
+
+   @if (hasError) {
+      <div class="error-message">
+         <mat-icon name="error" />
+         <span>{{ errorText }}</span>
+      </div>
+   } @else {
+      <!-- Options -->
+      <ul #optionsList>
+         <li
+            *ngFor="let option of visibleOptions; let index = index"
+            [class.active]="index === activeIndex"
+            (mousedown)="selectOption(option, $event)"
+         >
+            <!-- Check -->
+            <span class="option-check">
+               <i *ngIf="optionIsSelected(option)" class="material-symbols-outlined">check</i>
+            </span>
+
+            <!-- Caption -->
+            <span tabindex="-1" class="label-text">{{ option?.displayValue }}</span>
+
+            <!-- Favorite -->
+            <i
+               *ngIf="favoriteKey && allowSearch"
+               class="favorite material-symbols-outlined"
+               [class.favorite-show]="isFavorite(option)"
+               (mousedown)="toggleFavorite(option, $event)"
+            >
+               star
+            </i>
+         </li>
+      </ul>
+   }
+</app-popover>

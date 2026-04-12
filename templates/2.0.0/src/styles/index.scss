@@ -1,0 +1,15 @@
+// First Import all the common styles
+@use '../_internal/styles' as *;
+
+// Then apply the App specific styles
+@use './_colors-theme.scss' as *;
+@use './_variables.scss' as *;
+@use './_global.scss' as *;
+@use './_shared.scss' as *;
+
+// Pages
+@use './pages/_pages.scss' as *;
+
+// External
+@use '../assets/fonts/BodrumSans-16Bold/style.css' as *;
+@use '../assets/fonts/google-font/style.css' as *;

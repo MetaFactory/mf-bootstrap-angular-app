@@ -1,0 +1,15 @@
+label.custom-checkbox {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  mat-icon {
+    height: 1rem;
+    margin-top: -0.5rem;
+  }
+}

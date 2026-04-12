@@ -1,0 +1,15 @@
+{
+   "id": 3790259,
+   "login": "farhad",
+   "firstName": "Farhad",
+   "lastName": "Jalali",
+   "email": "farhad@metafactory.nl",
+   "imageUrl": null,
+   "activated": true,
+   "langKey": "en",
+   "createdBy": "tony",
+   "createdDate": "2023-09-14T10:03:28.286838Z",
+   "lastModifiedBy": "anonymousUser",
+   "lastModifiedDate": "2023-09-14T11:12:35.774670Z",
+   "authorities": ["ROLE_USER", "ROLE_ADMIN", "ROLE_EMPLOYEE"]
+}

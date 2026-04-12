@@ -1,0 +1,37 @@
+<div class="entity-view">
+   <!-- Multi group -->
+   @if (groupedFields.length > 1) {
+      @for (group of groupedFields; track group) {
+         <div class="entity-view-group">
+            <h3 class="group-title">{{ group.name }}</h3>
+            @for (field of group.fields; track $index) {
+               <ng-container
+                  *ngTemplateOutlet="fieldTemplate; context: { $implicit: field }"
+               ></ng-container>
+            }
+         </div>
+      }
+   } @else {
+      <!-- Single group -->
+      @for (field of visibleFields; track $index) {
+         <ng-container
+            *ngTemplateOutlet="fieldTemplate; context: { $implicit: field }"
+         ></ng-container>
+      }
+   }
+</div>
+
+<!-- Field -->
+<ng-template #fieldTemplate let-field>
+   <div class="entity-view-field">
+      <div class="entity-view_title">{{ getFieldTitle(field) }}</div>
+      <div
+         [innerHtml]="getFieldDescription(field)"
+         *ngIf="field.description"
+         class="entity-view_description"
+      ></div>
+      <div class="entity-view_value" [class.multi-line]="field.multiline">
+         <app-entity-field-view [field]="field" [record]="this.entity" />
+      </div>
+   </div>
+</ng-template>

@@ -1,0 +1,40 @@
+:root {
+   --primary: #007bff;
+   --secondary: #6c757d;
+   --success: #28a745;
+   --info: #4eb4b8;
+   --warning: #ffc107;
+   --danger: #dc3545;
+   --light: #f8f9fa;
+   --dark: #343a40;
+
+   --link-color: var(--blue-500);
+
+   // Default brand colors
+   --brand-50: #effbfb;
+   --brand-100: #e0f7f8;
+   --brand-200: #b0eff1;
+   --brand-300: #80e6ea;
+   --brand-400: #50ded2;
+   --brand-500: #64c8cc;
+   --brand-600: #4eb4b8;
+   --brand-700: #3a9fa3;
+   --brand-800: #268b8f;
+   --brand-900: #12767a;
+   --brand-1000: #0d5b63;
+
+   --link-color: var(--brand-600);
+
+   //! Sidebar
+   --sidebar-bg-color: var(--gray-100);
+   --sidebar-color: var(--gray-600);
+   --sidebar-bg-color__hover: var(--gray-300);
+   --sidebar-color__hover: var(--gray-900);
+   --sidebar-bg-color__active: var(--gray-200);
+   --sidebar-color__active: var(--gray-700);
+   --sidebar-separator_color: var(--gray-200);
+
+   //! Data-table
+   --datatable-header-bg: var(--gray-500);
+   --datatable-header: var(--gray-50);
+}

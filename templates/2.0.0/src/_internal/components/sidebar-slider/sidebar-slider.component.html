@@ -1,0 +1,7 @@
+<app-backdrop [open]="isOpen" (hide)="onClose.emit()">
+   <div class="sidebar-slider" [class.sidebar-slider-show]="isOpen">
+      <div class="sidebar-slider-container">
+         <ng-content></ng-content>
+      </div>
+   </div>
+</app-backdrop>

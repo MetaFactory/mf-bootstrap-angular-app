@@ -1,0 +1,14 @@
+{
+   "copyright": "Copyright 2024 MetaFactory. All rights reserved.",
+   "version": "Version",
+
+   "user-profile": "User Profile",
+   "change-password": "Change Password",
+   "preferences": "Preferences",
+   "language": "Language",
+   "logout": "Logout",
+
+   "Status.PENDING": "Pending",
+   "Status.CONFIRMED": "Confirmed",
+   "Status.CANCELLED": "Cancelled"
+}

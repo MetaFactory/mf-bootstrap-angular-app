@@ -1,0 +1,10 @@
+<form [formGroup]="form" #formContainer>
+   <app-filter-bar-field
+      *ngFor="let field of fields; trackBy: trackByFn"
+      [field]="field"
+      (onOptionsSearch)="handleOptionsSearch({ field, search: $event })"
+      [formGroup]="form"
+      [hasError]="fieldHasError[field.name!]"
+      [errorText]="fieldErrorText[field.name!]"
+   />
+</form>

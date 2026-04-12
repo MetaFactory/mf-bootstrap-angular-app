@@ -1,0 +1,19 @@
+<app-modal title="Preferences" [isOpen]="isOpen" (close)="close.emit()">
+   <ul cdkDropList class="main-content" (cdkDropListDropped)="drop($event)">
+      <li cdkDrag (click)="handleClick($event)" *ngFor="let field of orderedFields">
+         <app-row>
+            <!-- <i class="material-symbols-outlined">drag_indicator</i> -->
+            <app-switch
+               (toggle)="toggleField($event, field.name!)"
+               [isChecked]="!hiddens.includes(field.name!)"
+            ></app-switch>
+            <span>{{ field.title }}</span>
+         </app-row>
+      </li>
+   </ul>
+
+   <app-row class="footer-content" align="right">
+      <app-button variant="text" color="secondary" (click)="close.emit()">Cancel</app-button>
+      <app-button color="warning" (click)="handleConfirm()">Confirm</app-button>
+   </app-row>
+</app-modal>

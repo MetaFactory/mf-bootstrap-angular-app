@@ -1,0 +1,58 @@
+<div
+   #inputRef
+   class="app-input-date"
+   [class.has-value]="hasValue"
+   tabindex="0"
+   [title]="config.value.dateFormat"
+>
+   <input
+      [autofocus]
+      [attr.name]="name"
+      (click)="toggleCalendar(true)"
+      (blur)="blurDateInput($event)"
+      (keydown.enter)="handleEnter($event)"
+      [placeholder]="placeholder || ''"
+      autocomplete="off"
+      [value]="dateValue"
+   />
+   <i
+      *ngIf="!resetButton || !hasValue"
+      (click)="toggleCalendar(true)"
+      class="material-symbols-outlined"
+      >calendar_today</i
+   >
+
+   <!-- Time -->
+   <select
+      *ngIf="hasTime && dateValue"
+      [attr.name]="name + '-time'"
+      [(ngModel)]="timeValue"
+      (change)="timeChanged($event)"
+   >
+      <option [value]="time" *ngFor="let time of times">{{ time }}</option>
+   </select>
+
+   <!-- Reset Button -->
+   <i
+      *ngIf="resetButton && hasValue"
+      class="reset-button material-symbols-outlined"
+      (click)="resetValues($event)"
+      >close</i
+   >
+</div>
+
+<app-popover
+   [maxWidth]="368"
+   [open]="isCalendarVisible"
+   [anchorRect]="inputRect"
+   (close)="toggleCalendar(false)"
+   [maxHeight]="420"
+>
+   <app-calendar
+      [hidden]="!isCalendarVisible"
+      [isHidden]="!isCalendarVisible"
+      [format]="config.value.dateFormat"
+      [selectedDate]="value"
+      (onSelect)="handleSelect($event)"
+   />
+</app-popover>

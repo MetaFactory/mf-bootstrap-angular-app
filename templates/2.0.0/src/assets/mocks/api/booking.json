@@ -1,0 +1,56 @@
+{
+   "pageNumber": 0,
+   "pageSize": 10,
+   "pageCount": 1,
+   "totalElements": 4,
+   "items": [
+      {
+         "id": 1,
+         "guestName": "John Doe",
+         "guestEmail": "john.doe@example.com",
+         "startTime": "2026-04-15T10:00:00Z",
+         "endTime": "2026-04-15T10:30:00Z",
+         "status": "CONFIRMED",
+         "statusDisplayValue": "BookingStatus.CONFIRMED",
+         "bookingPagePkId": 1,
+         "bookingPageDisplayValue": "30-Minute Meeting",
+         "notes": "Initial consultation"
+      },
+      {
+         "id": 2,
+         "guestName": "Jane Smith",
+         "guestEmail": "jane.smith@example.com",
+         "startTime": "2026-04-16T14:00:00Z",
+         "endTime": "2026-04-16T15:00:00Z",
+         "status": "PENDING",
+         "statusDisplayValue": "BookingStatus.PENDING",
+         "bookingPagePkId": 2,
+         "bookingPageDisplayValue": "60-Minute Consultation",
+         "notes": "Follow-up discussion"
+      },
+      {
+         "id": 3,
+         "guestName": "Bob Wilson",
+         "guestEmail": "bob.wilson@example.com",
+         "startTime": "2026-04-17T09:00:00Z",
+         "endTime": "2026-04-17T09:30:00Z",
+         "status": "CANCELLED",
+         "statusDisplayValue": "BookingStatus.CANCELLED",
+         "bookingPagePkId": 1,
+         "bookingPageDisplayValue": "30-Minute Meeting",
+         "notes": "Cancelled by guest"
+      },
+      {
+         "id": 4,
+         "guestName": "Alice Brown",
+         "guestEmail": "alice.brown@example.com",
+         "startTime": "2026-04-18T11:00:00Z",
+         "endTime": "2026-04-18T11:30:00Z",
+         "status": "PENDING",
+         "statusDisplayValue": "BookingStatus.PENDING",
+         "bookingPagePkId": 1,
+         "bookingPageDisplayValue": "30-Minute Meeting",
+         "notes": ""
+      }
+   ]
+}

@@ -1,0 +1,77 @@
+<div class="account-menu">
+   <header class="account-menu_header">
+      @if (general$.value.userPhoto) {
+         <img [src]="general$.value.userPhoto" alt="User photo" />
+      } @else {
+         <i class="material-symbols-outlined">account_circle</i>
+      }
+      <app-column align="flex-start">
+         <h2>{{ title }}</h2>
+         <h3>{{ email }}</h3>
+      </app-column>
+   </header>
+
+   <!-- Theme -->
+   <div class="account-menu_theme">
+      <div class="account-menu_theme_buttons">
+         <div [class]="'active_item_shadow ' + general$.value.theme">&nbsp;</div>
+         <a (click)="selectTheme('dark')">
+            <mat-icon name="dark_mode" />
+            <div>Dark</div>
+         </a>
+         <a (click)="selectTheme('light')">
+            <mat-icon name="light_mode" />
+            <div>Light</div>
+         </a>
+         <a (click)="selectTheme('system')">
+            <mat-icon name="devices" />
+            <div>System</div>
+         </a>
+      </div>
+   </div>
+
+   <!-- Language -->
+   <div class="account-menu_languages">
+      <div
+         role="button"
+         class="menu-item"
+         [class.active]="translate.currentLang == language.id"
+         *ngFor="let language of general$.value.languages"
+         (click)="chooseLanguage(language)"
+      >
+         {{ language.displayValue }}
+      </div>
+   </div>
+
+   <!-- User Profile -->
+   <div class="menu-item" (click)="handleUserProfile()">
+      <mat-icon name="account_circle" />
+      <span>{{ 'user-profile' | translate }}</span>
+   </div>
+
+   <!-- Change Password -->
+   <div class="menu-item" (click)="handleChangePassword()">
+      <mat-icon name="password" />
+      <span>{{ 'change-password' | translate }}</span>
+   </div>
+
+   <!-- Preferences -->
+   <div class="menu-item" *ngIf="hasUserPreference" (click)="handlePreferences()">
+      <mat-icon name="tune" />
+      <span>{{ 'preferences' | translate }}</span>
+   </div>
+
+   <!-- Logout -->
+   <div class="menu-item" (click)="logout()">
+      <mat-icon name="logout" />
+      <span>{{ 'logout' | translate }}</span>
+   </div>
+
+   <!-- Footer -->
+   <footer class="account-menu_footer">
+      <div class="copyright">{{ 'copyright' | translate }}</div>
+      <div class="version">
+         {{ 'version' | translate }} <strong>{{ version }}</strong>
+      </div>
+   </footer>
+</div>

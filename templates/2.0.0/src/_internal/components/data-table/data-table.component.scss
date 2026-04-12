@@ -1,0 +1,158 @@
+@use '../../styles/mixins' as *;
+
+.app-data-table {
+   overflow: auto;
+   max-width: min(1200px, 100%);
+
+   @include no-mobile {
+      table {
+         min-width: 500px;
+      }
+   }
+}
+
+td {
+   transition: all 0.2s;
+   font-size: 0.9rem;
+   text-align: left;
+   border-bottom: 1px solid var(--gray-100);
+   padding: 1rem 0.5rem;
+   cursor: pointer;
+
+   a {
+      text-decoration: underline;
+      color: var(--brand-900);
+   }
+
+   &[data-column-type='DATE'],
+   &[data-column-type='DATE_TIME'] {
+      white-space: nowrap;
+   }
+
+   &.action-cell {
+      padding: 0;
+
+      .action-cell-container {
+         display: flex;
+         white-space: nowrap;
+      }
+   }
+
+   &.cell-select {
+      color: var(--gray-500);
+   }
+}
+
+tbody {
+   tr:hover {
+      background-color: whitesmoke;
+   }
+
+   tr.selected {
+      background-color: var(--brand-100);
+
+      td {
+         border-bottom: 1px solid var(--brand-200);
+      }
+   }
+
+   ::ng-deep {
+      ul.field-array-list {
+         display: flex;
+         gap: 1px;
+         flex-direction: column;
+         align-items: flex-start;
+
+         li {
+            list-style: none;
+            background-color: var(--bluegray-500);
+            padding: 1px 7px;
+            border-radius: 5px;
+            color: white;
+            font-size: smaller;
+         }
+      }
+   }
+}
+
+th {
+   text-align: left;
+   padding: 0.5rem 0.5rem;
+   min-height: 50px;
+   height: 50px;
+   box-sizing: border-box;
+   border-width: 0 0 1px 0;
+   font-weight: 400;
+   font-size: 0.9rem;
+   background-color: var(--datatable-header-bg);
+   color: var(--datatable-header);
+   transition: none;
+   cursor: pointer;
+
+   ::ng-deep {
+      mat-icon {
+         color: var(--gray-300) !important;
+      }
+   }
+
+   div {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+
+      i {
+         font-size: 1rem;
+
+         &.sort-hide {
+            visibility: hidden;
+         }
+
+         &.sort-desc {
+            transform: rotate(180deg);
+         }
+      }
+
+      &:hover i {
+         visibility: visible;
+      }
+   }
+
+   &:not(:last-of-type) div {
+      border-right: 1px solid var(--gray-300);
+      padding-right: 8px;
+   }
+}
+
+::ng-deep html.dark {
+   td {
+      border-bottom-color: var(--gray-500);
+
+      a {
+         color: var(--brand-300) !important;
+      }
+
+      &.cell-select {
+         color: var(--gray-400);
+      }
+   }
+
+   thead {
+      th {
+         border-bottom: 1px solid var(--gray-700) !important;
+      }
+   }
+
+   tbody {
+      tr:hover {
+         background-color: var(--gray-600) !important;
+      }
+
+      tr.selected {
+         background-color: var(--gray-500) !important;
+         td {
+            border-bottom: 1px solid var(--brand-600) !important;
+         }
+      }
+   }
+}

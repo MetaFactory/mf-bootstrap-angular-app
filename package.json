@@ -1,0 +1,19 @@
+{
+  "name": "mfe-common-library",
+  "version": "1.0.0",
+  "description": "CLI tool to scaffold MFE projects from versioned templates",
+  "bin": {
+    "mfe-common-library": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "templates/"
+  ],
+  "keywords": [
+    "mfe",
+    "scaffold",
+    "template",
+    "cli"
+  ],
+  "license": "PRIVATE"
+}

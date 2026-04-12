@@ -1,0 +1,24 @@
+<app-backdrop [open]="isOpen" (hide)="close.emit()">
+  <section class="modal" [class.modal-show]="isOpen">
+    <div class="modal-container">
+      <header>
+        <h1>{{ title }}</h1>
+        <app-icon-button
+          tooltip="Close"
+          icon="close"
+          size="sm"
+          color="secondary"
+          (click)="close.emit()"
+        />
+      </header>
+
+      <div class="modal-body">
+        <ng-content select=".main-content"></ng-content>
+      </div>
+
+      <footer>
+        <ng-content select=".footer-content"></ng-content>
+      </footer>
+    </div>
+  </section>
+</app-backdrop>

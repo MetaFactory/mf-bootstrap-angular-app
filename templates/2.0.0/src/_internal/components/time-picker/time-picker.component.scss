@@ -1,0 +1,86 @@
+.time-picker {
+   width: 360px;
+   height: 360px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.clock {
+   position: absolute;
+}
+
+.hour-section,
+.minute-section {
+   position: relative;
+   width: 300px;
+   height: 300px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   .center {
+      mat-icon {
+         font-size: 40px;
+      }
+   }
+
+   .cell {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 50%;
+      left: 50%;
+      margin-left: -20px;
+      margin-top: -20px;
+      transform-origin: center;
+      cursor: pointer;
+      font-family: tahoma;
+      border-radius: 50%;
+      transition: all 0.1s ease;
+   }
+}
+
+.minute-section {
+   background-color: var(--gray-50);
+   width: 350px;
+   height: 350px;
+   .cell {
+      font-size: 1rem;
+      color: var(--gray-400);
+
+      &:hover {
+         font-size: 1.8rem;
+      }
+
+      &.selected {
+         background-color: var(--brand-500);
+         color: white;
+      }
+   }
+}
+
+.hour-section {
+   background-color: white;
+   width: 250px;
+   height: 250px;
+
+   .cell {
+      font-size: 1.5rem;
+      color: var(--gray-500);
+
+      &:hover {
+         font-size: 2.2rem;
+         background-color: white;
+      }
+
+      &.selected {
+         background-color: var(--brand-700);
+         color: white;
+      }
+   }
+}

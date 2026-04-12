@@ -1,0 +1,21 @@
+:host {
+   border-radius: 6px;
+   overflow: hidden;
+   display: inline-block;
+}
+
+button {
+   border: none;
+   padding: 0.5rem 1rem;
+   cursor: pointer;
+   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+   &.selected {
+      background-color: var(--brand-800);
+      color: var(--brand-100);
+   }
+
+   &.selected.naButton {
+      opacity: 0.5;
+   }
+}

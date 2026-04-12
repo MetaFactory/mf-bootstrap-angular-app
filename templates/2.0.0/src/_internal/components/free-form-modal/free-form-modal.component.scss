@@ -1,0 +1,15 @@
+::ng-deep {
+   .free-form_description {
+      blockquote {
+         padding: 0.5rem 1rem;
+         margin: 0.5rem 0;
+         border-left: 5px solid var(--info);
+         background-color: var(--brand-100);
+      }
+   }
+}
+
+.footer-content {
+   padding: 0 1rem;
+   justify-content: flex-end;
+}

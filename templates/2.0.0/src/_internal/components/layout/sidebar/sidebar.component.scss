@@ -1,0 +1,55 @@
+aside {
+   height: 100%;
+   padding: 2rem 0;
+   transition: width 0.2s ease;
+   overflow-x: hidden;
+   overflow-y: auto;
+
+   &.collapse {
+      width: 0;
+   }
+}
+
+ul {
+   list-style-type: none;
+
+   hr {
+      height: 4px;
+      background-color: var(--sidebar-separator_color);
+      border: none;
+      margin: 1rem 0;
+   }
+
+   li {
+      white-space: nowrap;
+
+      &.separator {
+         border-bottom: 2px solid var(--gray-200);
+      }
+   }
+}
+
+::ng-deep aside a {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 0.5rem;
+   padding: 1rem;
+   cursor: pointer;
+
+   i {
+      width: 28px;
+      min-width: 28px; // while collapsing sidebar
+      color: inherit;
+   }
+
+   &:hover {
+      background-color: var(--sidebar-bg-color__hover);
+      color: var(--sidebar-color__hover);
+   }
+
+   &.active-link {
+      background-color: var(--sidebar-bg-color__active);
+      background-color: var(--sidebar-bg-color__active);
+   }
+}

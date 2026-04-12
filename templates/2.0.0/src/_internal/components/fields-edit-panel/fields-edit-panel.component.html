@@ -1,0 +1,34 @@
+<form [formGroup]="this.form">
+   <div
+      class="entity-field"
+      *ngFor="let field of fields; trackBy: trackByFn"
+      [hidden]="isFieldHidden(field)"
+   >
+      <div
+         [innerHtml]="getFieldDescription(field)"
+         *ngIf="field.description"
+         class="cmn-text-subtitle"
+      ></div>
+
+      <label [for]="field.name + '-input'">
+         <span>{{ getFieldTitle(field) }}</span>
+      </label>
+
+      @if (field.editState === 'readonly') {
+         <div class="entity-field_readonly-value">
+            {{ getDisplayValue(field) ?? '-' }}
+         </div>
+      } @else {
+         <app-entity-field-edit
+            [field]="field"
+            [formGroup]="form"
+            (onOptionsSearch)="handleOptionsSearch({ field, search: $event })"
+         />
+      }
+      @if (this.form.get(field.name!)?.errors?.['required']) {
+         <div class="validation-message">
+            The <strong>{{ field.title }}</strong> field is required!
+         </div>
+      }
+   </div>
+</form>

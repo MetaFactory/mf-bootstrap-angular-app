@@ -1,0 +1,21 @@
+@if (isExternal(item.path)) {
+   <a [href]="item.path" target="_blank">
+      <i class="material-symbols-outlined">{{ item.icon }}</i>
+      <span>
+         {{ item.translationBase ? translate.instant(item.translationBase) : item.title }}
+      </span>
+   </a>
+} @else {
+   <a
+      [routerLink]="item.path"
+      routerLinkActive="active-link"
+      [class.active-link]="selectedPath === item.path"
+      [class.display-mode-mobile]="item.displayMode !== 'desktop'"
+      [class.display-mode-desktop]="item.displayMode !== 'mobile'"
+   >
+      <i class="material-symbols-outlined">{{ item.icon }}</i>
+      <span>
+         {{ item.translationBase ? translate.instant(item.translationBase) : item.title }}
+      </span>
+   </a>
+}

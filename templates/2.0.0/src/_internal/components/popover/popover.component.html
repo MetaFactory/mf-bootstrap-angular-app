@@ -1,0 +1,13 @@
+<app-backdrop [open]="open" [blur]="blurBackdrop" (hide)="handleClose()">
+   <div
+      class="app-popover"
+      [class.visible]="open"
+      [style.left.px]="position?.left"
+      [style.right.px]="position?.right"
+      [style.top.px]="position?.top"
+      [style.maxWidth.px]="maxWidth"
+      [style.maxHeight.px]="maxHeight"
+      [style.bottom.px]="position?.bottom"
+   >
+      <ng-content /></div
+></app-backdrop>

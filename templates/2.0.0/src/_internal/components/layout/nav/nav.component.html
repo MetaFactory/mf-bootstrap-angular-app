@@ -1,0 +1,10 @@
+<nav>
+   @for (item of items; track $index) {
+      @if (
+         (general$.value.isMobile && item.displayMode !== 'desktop') ||
+         (!general$.value.isMobile && item.displayMode !== 'mobile')
+      ) {
+         <app-link [item]="item" [selectedPath]="selectedPath" />
+      }
+   }
+</nav>

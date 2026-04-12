@@ -1,0 +1,34 @@
+<form [formGroup]="form" (submit)="login()">
+   <app-row>
+      <h1>{{ general$.value.loginTitle }}</h1>
+      <div class="version-label">{{ version }}</div>
+   </app-row>
+   <br />
+
+   <label for="username">User name</label>
+   <input
+      id="username"
+      name="username"
+      autofocus
+      autocomplete="true"
+      formControlName="username"
+      placeholder="User name"
+   />
+
+   <label for="password">Password</label>
+   <input
+      id="password"
+      name="password"
+      type="password"
+      autocomplete="true"
+      formControlName="password"
+      placeholder="Password"
+   />
+
+   <app-checkbox label="Remember me!" formControlName="rememberMe" name="rememberMe" />
+   <br />
+
+   <app-button type="submit">Login</app-button>
+   <div class="error-message">{{ error }}</div>
+   <!-- <a class="forgot-password">Did you forget your password?</a> -->
+</form>

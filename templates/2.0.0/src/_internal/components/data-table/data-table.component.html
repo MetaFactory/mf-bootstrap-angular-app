@@ -1,0 +1,84 @@
+<div class="app-data-table">
+   <table>
+      <!-- Head -->
+      <thead>
+         <tr>
+            <th *ngIf="canSelect" (click)="toggleAllSelection()">
+               <mat-icon
+                  color="secondary"
+                  [name]="
+                     multiSelections.length == 0
+                        ? 'check_box_outline_blank'
+                        : multiSelections.length == items?.length
+                          ? 'check_box'
+                          : 'indeterminate_check_box'
+                  "
+               />
+            </th>
+            <th *ngFor="let field of orderedFields" (click)="handleClickHeader(field)">
+               <div>
+                  {{ getFieldTitle(field) }}
+                  <i
+                     *ngIf="field.sortable"
+                     [class.sort-hide]="field.sortParamName !== this.sortField"
+                     [class.sort-desc]="
+                        field.sortParamName === this.sortField && this.sortOrder === 'desc'
+                     "
+                     class="material-symbols-outlined"
+                     >expand_more</i
+                  >
+               </div>
+            </th>
+            <th></th>
+         </tr>
+      </thead>
+
+      <!-- Body -->
+      <tbody>
+         <tr
+            [class.selected]="multiSelections.includes(item.id!) || item === this.selectedItem"
+            *ngFor="let item of this.items"
+         >
+            <!-- Selection Cell -->
+            <td
+               *ngIf="canSelect"
+               class="cell-select"
+               (mousedown)="toggleMultiSelection(item, $event)"
+            >
+               <mat-icon
+                  [name]="
+                     multiSelections.includes(item.id!) ? 'check_box' : 'check_box_outline_blank'
+                  "
+               />
+            </td>
+
+            <!-- Data Cells -->
+            <td
+               *ngFor="let field of orderedFields"
+               (click)="handleRowFocus(item)"
+               [attr.data-column-name]="field.name"
+               [attr.data-column-type]="field.type"
+               [attr.data-column-value]="getFieldSingleRawValue(item, field)"
+            >
+               <app-entity-field-view [field]="field" [record]="item" />
+            </td>
+
+            <!-- Action Cell -->
+            <td class="action-cell">
+               <div class="action-cell-container">
+                  <app-icon-button
+                     *ngFor="let action of itemActions"
+                     size="lg"
+                     [icon]="action.icon!"
+                     [tooltip]="action.title"
+                     [css]="action.css"
+                     (click)="onItemAction.emit({ item, action })"
+                  />
+               </div>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+

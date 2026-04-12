@@ -1,0 +1,8 @@
+<app-menu [open]="open" (close)="close.emit()">
+  <app-menu-item
+    *ngFor="let language of languages"
+    (click)="chooseLanguage($event)"
+    [value]="language.id"
+    [label]="language.displayValue"
+  ></app-menu-item>
+</app-menu>

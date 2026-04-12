@@ -1,0 +1,221 @@
+<section
+   *ngIf="schema"
+   [class]="'entity-panel view-mode-' + this.viewMode"
+   [attr.data-schema-name]="formSchema.name"
+   [attr.data-view-template]="schema.viewTemplate"
+>
+   <!-- Header -->
+   <ng-container *ngTemplateOutlet="header" />
+
+   <!-- Tabs (multi-tab) -->
+   <ng-container *ngTemplateOutlet="tabs" />
+
+   <!-- Content -->
+   @switch (this.viewMode) {
+      <!-- View Mode -->
+      @case ('view') {
+         <ng-container *ngTemplateOutlet="view" />
+      }
+
+      <!-- Edit Mode -->
+      @case ('edit') {
+         <ng-container *ngTemplateOutlet="edit" />
+      }
+
+      <!-- Create Mode -->
+      @case ('create') {
+         <ng-container *ngTemplateOutlet="edit" />
+      }
+   }
+
+   <app-progress-status [status]="loadingStatus" (retry)="switchMode(this.viewMode)" />
+</section>
+
+<!-- Header -->
+<ng-template #header>
+   <header *ngIf="viewMode === 'view' && (entity || editEntity)">
+      <app-row class="overflow-hidden">
+         <button
+            *ngIf="standalone || general$.value.isMobile"
+            class="back-button"
+            (click)="goBack()"
+         >
+            <i class="material-symbols-outlined">arrow_back_ios</i>
+         </button>
+
+         <app-icon-button
+            *ngIf="!standalone && !general$.value.isMobile"
+            icon="close"
+            color="secondary"
+            (click)="onClose.emit()"
+         />
+
+         <h1>{{ title }}</h1>
+      </app-row>
+
+      <span class="expander"></span>
+
+      <app-row class="header-actions" *ngIf="viewMode === 'view'">
+         <!-- Always visible actions -->
+         @for (action of schema.actions; track $index) {
+            <!-- Desktop AND HAVE title  -->
+            @if (!general$.value.isMobile && action.title) {
+               <app-button
+                  *ngIf="action.visibility == 'always'"
+                  [startIcon]="action.icon"
+                  color="info"
+                  variant="contained"
+                  (click)="processAction(action)"
+               >
+                  {{ action.title }}</app-button
+               >
+            } @else {
+               <app-icon-button
+                  [icon]="action.icon!"
+                  color="info"
+                  variant="rounded"
+                  (click)="processAction(action)"
+               />
+            }
+         }
+
+         <!-- More actions  -->
+         <div class="relative">
+            <app-icon-button
+               *ngIf="moreActionsAvailable"
+               icon="more_horiz"
+               color="info"
+               variant="rounded"
+               (click)="openMoreMenu(true)"
+            />
+
+            <app-menu [open]="showMoreMenu" (close)="openMoreMenu(false)">
+               @for (action of schema.actions; track $index) {
+                  <app-menu-item
+                     *ngIf="!action.visibility || action.visibility == 'more'"
+                     [icon]="action.icon"
+                     (click)="({})"
+                     [value]="1"
+                     [label]="action.title!"
+                  />
+               }
+            </app-menu>
+         </div>
+      </app-row>
+   </header>
+</ng-template>
+
+<!-- Tabs (multi-tab) -->
+<ng-template #tabs>
+   @if (
+      entity && schema.viewTemplate === 'multi-tab' && schema.sections.length && viewMode === 'view'
+   ) {
+      <ul class="tabs">
+         <li [ngClass]="{ active: selectedTab == '' }" (click)="selectTab()">
+            <button>Details</button>
+         </li>
+
+         @for (section of schema.sections; track $index) {
+            <li [ngClass]="{ active: selectedTab == section.name }" (click)="selectTab(section)">
+               <button>{{ section.schema.title }}</button>
+            </li>
+         }
+      </ul>
+   }
+</ng-template>
+
+<!-- Edit Mode -->
+<ng-template #edit
+   ><app-entity-edit-panel
+      class="entity-edit-panel"
+      *ngIf="editEntity"
+      [fields]="schema.fields!"
+      [title]="title"
+      [attr.data-schema-path]="schema.path"
+      [entity]="editEntity"
+      [formActionState]="formActionState"
+      (onChange)="handleChange($event)"
+      (onSave)="handleUpsert($event)"
+      (onCancel)="onClose.emit()"
+/></ng-template>
+
+<!-- View Mode -->
+<ng-template #view>
+   <div class="entity-panel_content" *ngIf="entity">
+      <div
+         class="view-entity-panel"
+         [attr.data-section]="'details'"
+         [hidden]="schema.viewTemplate === 'multi-tab' && selectedTab"
+      >
+         <div class="entity-view-container">
+            <app-entity-view [fields]="schema.fields!" [entity]="entity" />
+         </div>
+      </div>
+
+      <!-- Sections (columns, besides Details column) -->
+      @for (section of schema.sections; track $index) {
+         <div
+            [class]="
+               'view-entity-panel view-entity-panel_width_' + (section.schema.width || 'auto')
+            "
+            [attr.data-section]="section.name"
+            [hidden]="schema.viewTemplate === 'multi-tab' && selectedTab !== section.name"
+         >
+            <h2 *ngIf="schema.viewTemplate === 'multi-column'">{{ section.schema.title }}</h2>
+
+            @if (sectionHasError[section.name]) {
+               <div class="section-error-message">
+                  <mat-icon name="error" color="danger"></mat-icon>
+                  <span>{{ sectionErrorText[section.name] || 'Oops! Something web wrong!' }}</span>
+               </div>
+            } @else {
+               <!-- Actions -->
+               <app-column
+                  *ngIf="hasSectionVisibleActions(section)"
+                  [gap]="1"
+                  [align]="'flex-start'"
+               >
+                  @for (action of getSectionVisibleActions(section); track $index) {
+                     <app-button
+                        [startIcon]="action.icon"
+                        [attr.data-action-command]="action.command"
+                        color="warning"
+                        (click)="processAction(action, section)"
+                        >{{ action.title }}</app-button
+                     >
+                  }
+               </app-column>
+
+               <br />
+
+               <app-responsive-data-table
+                  [fields]="section.schema.fields || []"
+                  [service]="service"
+                  (onSelectItem)="selectEntity(section, $event)"
+                  (onSort)="handleSort($event, section)"
+                  [items]="getSectionListValue(section)"
+                  [itemActions]="getItemActions(section)"
+                  (onItemAction)="handleItemAction(section, $event)"
+                  [hasMore]="false"
+               />
+            }
+         </div>
+      }
+   </div>
+
+   <!-- Delete confirm -->
+   <app-modal
+      title="Confirm Delete"
+      [isOpen]="isConfirmDeleteOpen"
+      (close)="closeConfirmDelete(false)"
+   >
+      <div class="main-content">Are you sure you want to delete this item?</div>
+
+      <app-row class="footer-content" align="right">
+         <app-button variant="text" color="secondary" (click)="closeConfirmDelete(false)"
+            >Cancel</app-button
+         >
+         <app-button color="danger" (click)="closeConfirmDelete(true)">Delete</app-button>
+      </app-row>
+   </app-modal>
+</ng-template>

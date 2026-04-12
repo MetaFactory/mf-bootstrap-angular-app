@@ -1,0 +1,32 @@
+.sidebar-slider {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   background: #fff;
+   box-shadow:
+      0 0 10px -5px rgba(0, 0, 0, 0.2),
+      0 0 24px 2px rgba(0, 0, 0, 0.14),
+      0 0 30px 5px rgba(0, 0, 0, 0.12);
+   box-sizing: border-box;
+   z-index: var(--z-70);
+   height: 100%;
+   outline: none;
+   transform: translate(700px, 0);
+   will-change: transform;
+   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+   width: 700px;
+   max-width: 100%;
+   padding: 1rem 2rem;
+   overflow: auto;
+
+   &.sidebar-slider-show {
+      transform: translate(0, 0);
+   }
+
+   .sidebar-slider-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+   }
+}

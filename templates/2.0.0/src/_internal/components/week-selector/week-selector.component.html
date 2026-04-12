@@ -1,0 +1,30 @@
+<app-row [gap]="0" [attr.name]="name">
+   <app-icon-button color="info" icon="chevron_left" (click)="setValue(value - 1)" />
+
+   <app-icon-button color="info" icon="chevron_right" (click)="setValue(value + 1)" />
+
+   <div class="week-caption">
+      <mat-icon
+         *ngIf="value"
+         name="radio_button_unchecked"
+         color="orange-500"
+         [size]="19"
+         (click)="setValue(0)"
+      />
+      <span>{{ selectedWeekCaption }}</span>
+      <mat-icon
+         name="calendar_today"
+         color="brand-600"
+         [size]="19"
+         (click)="toggleCalendar(true)"
+      />
+      <app-popover [open]="isCalendarVisible" (close)="toggleCalendar(false)">
+         <app-calendar
+            [isHidden]="!isCalendarVisible"
+            [selectedDate]="selectedDate"
+            [selectByWeek]="true"
+            (onSelect)="handleSelectDate($event)"
+         />
+      </app-popover>
+   </div>
+</app-row>

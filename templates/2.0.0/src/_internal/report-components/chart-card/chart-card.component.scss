@@ -1,0 +1,18 @@
+@use '../../styles/_mixins.scss' as *;
+
+.chart-container {
+   /* Desktop */
+   @include no-mobile {
+      border: 1px solid var(--gray-200);
+      padding: 1rem;
+      width: 36rem;
+      height: 20rem;
+   }
+
+   /* Mobile */
+   @include mobile {
+      width: 100%;
+      padding: 1rem;
+      overflow: auto;
+   }
+}

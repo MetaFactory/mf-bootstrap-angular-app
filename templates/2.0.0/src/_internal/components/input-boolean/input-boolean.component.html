@@ -1,0 +1,5 @@
+<app-row [gap]="0.1" [id]="id">
+   <button (click)="setValue(true)"  [class.selected]="value === true">YES</button>
+   <button (click)="setValue(false)" [class.selected]="value === false">NO</button>
+   <button class="naButton" (click)="setValue(null)" [class.selected]="value === null" *ngIf="nullable">N/A</button>
+</app-row>

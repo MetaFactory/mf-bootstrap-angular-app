@@ -1,0 +1,105 @@
+<!-- Select Day -->
+<div *ngIf="stage == 'day'">
+   <div class="calendar-header">
+      <!-- prev -->
+      <app-tooltip title="Previous Month" placement="bottom-start">
+         <app-icon-button
+            size="lg"
+            icon="chevron_left"
+            color="info"
+            (click)="navigate(offset - 1)"
+         />
+      </app-tooltip>
+
+      <app-row [gap]="0.25">
+         <!-- navigate: today -->
+         <app-tooltip title="Today" placement="bottom">
+            <app-icon-button
+               *ngIf="offset"
+               icon="radio_button_unchecked"
+               [iconSize]="24"
+               size="lg"
+               color="orange-500"
+               (click)="navigate(0)"
+            />
+         </app-tooltip>
+
+         <div (click)="changeStage('month')" class="calendar-header__month">
+            <app-tooltip title="Select Month / Year" placement="bottom">
+               {{ monthLabel }}
+            </app-tooltip>
+            <i class="material-symbols-outlined">arrow_drop_down</i>
+         </div>
+      </app-row>
+
+      <!-- next -->
+      <app-tooltip title="Next Month" placement="bottom-end">
+         <app-icon-button
+            size="lg"
+            icon="chevron_right"
+            color="info"
+            (click)="navigate(offset + 1)"
+         />
+      </app-tooltip>
+   </div>
+
+   <div class="calendar-days__head">
+      <div>M</div>
+      <div>T</div>
+      <div>W</div>
+      <div>T</div>
+      <div>F</div>
+      <div>S</div>
+      <div>S</div>
+   </div>
+
+   <div class="calendar-days__day calendar-grid">
+      <div
+         (click)="selectDay(day)"
+         [class.disabled]="day.disabled"
+         [class.selected]="day.selected"
+         [class.today]="day.today"
+         *ngFor="let day of days"
+      >
+         {{ day.day }}
+      </div>
+   </div>
+</div>
+
+<!-- Select Month/Year  -->
+<div *ngIf="stage == 'month'" class="calendar-month-select">
+   <!-- Month -->
+   <ul>
+      <li
+         *ngFor="let month of getMonths(0); let index = index"
+         [class.selected]="selectedMonth == index"
+         (click)="selectMonth(index)"
+      >
+         <span>{{ index + 1 }}</span>
+         {{ month }}
+      </li>
+   </ul>
+   <ul>
+      <li
+         *ngFor="let month of getMonths(6); let index = index"
+         (click)="selectMonth(index + 6)"
+         [class.selected]="selectedMonth == index + 6"
+      >
+         <span>{{ index + 7 }}</span>
+         {{ month }}
+      </li>
+   </ul>
+
+   <!-- Year -->
+   <ul>
+      <li (click)="moveYear(-5)" class="material-symbols-outlined">expand_less</li>
+      <li
+         (click)="selectYear(year)"
+         [class.selected]="selectedYear == year"
+         *ngFor="let year of years"
+      >
+         {{ year }}
+      </li>
+      <li (click)="moveYear(5)" class="material-symbols-outlined">expand_more</li>
+   </ul>
+</div>

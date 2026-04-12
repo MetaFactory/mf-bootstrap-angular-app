@@ -1,0 +1,31 @@
+// Define variables for breakpoints
+$size-mobile: 600px;
+$size-tablet: 1024px;
+
+// Mixin for mobile
+@mixin mobile {
+   @media screen and (max-width: $size-mobile - 1) {
+      @content;
+   }
+}
+
+// Mixin for tablet
+@mixin no-mobile {
+   @media screen and (min-width: $size-mobile) {
+      @content;
+   }
+}
+
+// Mixin for tablet
+@mixin tablet {
+   @media screen and (min-width: $size-mobile) and (max-width: $size-tablet - 1) {
+      @content;
+   }
+}
+
+// Mixin for desktop
+@mixin desktop {
+   @media screen and (min-width: $size-tablet) {
+      @content;
+   }
+}

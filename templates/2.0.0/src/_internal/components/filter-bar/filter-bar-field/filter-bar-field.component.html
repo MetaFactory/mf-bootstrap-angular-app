@@ -1,0 +1,79 @@
+<ng-container [formGroup]="this.formGroup">
+   @switch (field.type) {
+      <!-- SELECT -->
+      @case ('SELECT') {
+         <app-select
+            [placeholder]="field.title"
+            [name]="field.name"
+            [favoriteKey]="'filter-favorite-' + field.name"
+            [formControlName]="field.name!"
+            [multi]="field.multi ?? false"
+            [resetButton]="!field.required"
+            [autoComplete]="!!field.autocomplete"
+            [options]="field.options"
+            (onOptionsSearch)="this.onOptionsSearch.emit($event)"
+            [hasError]="hasError"
+            [errorText]="errorText"
+         />
+      }
+
+      <!-- BOOLEAN -->
+      @case ('BOOLEAN') {
+         <app-select
+            [placeholder]="field.title"
+            [name]="field.name"
+            [favoriteKey]="'filter-favorite-' + field.name"
+            [formControlName]="field.name!"
+            [multi]="field.multi ?? false"
+            [resetButton]="true"
+            [autoComplete]="!!field.autocomplete"
+            [options]="field.options"
+         />
+      }
+
+      <!-- DATE -->
+      @case ('DATE') {
+         <app-input-date
+            [name]="field.name"
+            placeholder="{{ field.title }}"
+            [formControlName]="field.name!"
+            [resetButton]="true"
+         />
+      }
+
+      <!-- Time -->
+      @case ('TIME') {
+         <app-input-time
+            [name]="field.name"
+            placeholder="{{ field.title }}"
+            [formControlName]="field.name!"
+            [resetButton]="true"
+         />
+      }
+
+      <!-- DATE_TIME -->
+      @case ('DATE_TIME') {
+         <app-input-date
+            [name]="field.name"
+            placeholder="{{ field.title }}"
+            [formControlName]="field.name!"
+            [resetButton]="true"
+         />
+      }
+
+      <!-- SELECT WEEK -->
+      @case ('SELECT-WEEK') {
+         <app-week-selector [name]="field.name" [formControlName]="field.name!" />
+      }
+
+      <!-- TEXT / NUMBER -->
+      @default {
+         <app-input-text
+            [formControlName]="field.name!"
+            [name]="field.name!"
+            [type]="field.type === 'NUMBER' ? 'number' : 'text'"
+            placeholder="{{ field.title }}"
+         />
+      }
+   }
+</ng-container>

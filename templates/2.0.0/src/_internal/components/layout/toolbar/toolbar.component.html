@@ -1,0 +1,47 @@
+<header class="toolbar">
+   <!-- Sidebar collapse -->
+   <app-icon-button
+      *ngIf="showSidebarIndicator"
+      [icon]="general$.value.collapseSidebar ? 'menu_open' : 'left_panel_close'"
+      (click)="toggleSidebar()"
+   />
+
+   <!-- Brand -->
+   <h1>
+      <img [src]="logo" alt="Logo" class="brand" />
+   </h1>
+
+   <!-- Notifications -->
+   <a
+      class="notification-button"
+      [class.active]="general$.value.activeNotificationsCount > 0"
+      [href]="general$.value.notificationLink"
+      *ngIf="general$.value.notificationLink"
+      target="_self"
+   >
+      <mat-icon name="notifications" [color]="'gray-600'" [fill]="true" />
+
+      <div class="notifications-count" *ngIf="general$.value.activeNotificationsCount">
+         {{ general$.value.activeNotificationsCount }}
+      </div>
+   </a>
+
+   <!-- Account menu -->
+   <div>
+      <a
+         class="toolbar_account"
+         title="Account"
+         (click)="handleClick($event)"
+         [href]="general$.value.isMobile ? general$.value.accountUrlMobile : '#'"
+      >
+         @if (general$.value.userPhoto) {
+            <img [src]="general$.value.userPhoto" alt="User photo" class="user-badge" />
+         } @else {
+            <i class="material-symbols-outlined">account_circle</i>
+         }
+      </a>
+      <app-popover [open]="isAccountMenuVisible" (close)="hideAccountMenu()" [blurBackdrop]="true">
+         <app-account-menu [store]="store" (close)="hideAccountMenu()" />
+      </app-popover>
+   </div>
+</header>

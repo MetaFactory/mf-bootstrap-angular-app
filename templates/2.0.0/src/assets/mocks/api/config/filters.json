@@ -1,0 +1,12 @@
+{
+   "filters": {
+      "tradeshow.name": {
+         "translationBase": "exhibition.name",
+         "type": "TEXT"
+      },
+      "exhibition.description": {
+         "translationBase": "exhibition.description",
+         "type": "TEXT"
+      }
+   }
+}

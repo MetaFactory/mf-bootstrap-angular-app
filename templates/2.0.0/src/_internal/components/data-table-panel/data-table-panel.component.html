@@ -1,0 +1,133 @@
+<div
+   class="data-table-panel"
+   *ngIf="state$ && schema"
+   [attr.data-schema-path]="schema.path"
+   [attr.data-schema-name]="schema.name"
+>
+   <!-- list panel -->
+   <div class="list-panel">
+      <header>
+         <!-- Header Title -->
+         <ng-container *ngTemplateOutlet="header" />
+
+         <!-- Form Description -->
+         <div
+            class="list-panel_description"
+            *ngIf="schema?.description"
+            [innerHtml]="schema.description | markdown"
+         ></div>
+
+         <!-- Number of records -->
+         @if (selections.length) {
+            <div class="cmn-text-subtitle">{{ selections.length }} record(s) selected</div>
+         } @else {
+            <div class="cmn-text-subtitle" *ngIf="state$.value.total != null">
+               {{ (state$ | async)?.total | number }} record(s)
+            </div>
+         }
+
+         <!-- Filter -->
+         @if (schema.filterFields) {
+            <app-filter-bar
+               [fields]="schema.filterFields!"
+               [defaultValue]="(state$ | async)!.filter"
+               (onChange)="filter($event)"
+            />
+         }
+      </header>
+
+      <!-- Empty Data Message -->
+      <div class="data-table-panel_empty-data-message" *ngIf="emptyDataMessage">
+         <mat-icon name="warning" />
+         {{ emptyDataMessage }}
+      </div>
+
+      <!-- Data Table -->
+      <app-responsive-data-table
+         *ngIf="!emptyDataMessage"
+         [fields]="schema.fields || []"
+         [canSelect]="schema.multiSelect ?? false"
+         [items]="(state$ | async)!.list"
+         [itemActions]="itemActions"
+         [width]="schema.width"
+         [service]="service"
+         [selectedItem]="selectedEntity"
+         (onSelectItem)="selectEntity($event)"
+         (onItemAction)="handleItemAction($event)"
+         (multiSelectionChange)="selections = $event"
+         [hasMore]="(state$ | async)!.hasMore"
+         [hiddenFieldsStorageKey]="schema.serviceName + '-fields-hiddens'"
+         (onShowMore)="showMore()"
+         (onSort)="sort($event)"
+      />
+
+      <app-custom-modal-host [component]="customModalComponent" />
+
+      <app-progress-status [status]="loadingStatus!" (retry)="loadList({})" />
+
+      <app-modal-preferences
+         [isOpen]="preferencesVisible"
+         (close)="showPreferences(false)"
+         [key]="schema.serviceName!"
+         [listFields]="schema.fields || []"
+      />
+   </div>
+</div>
+
+<!-- Header -->
+<ng-template #header>
+   <div class="header-title">
+      <h1>{{ schema.title }}</h1>
+
+      <!-- Actions -->
+      <div class="header-actions">
+         <!-- Create Button -->
+         @for (action of visibleActions; track $index) {
+            @if (general$.value.isMobile) {
+               <app-icon-button
+                  [icon]="action.icon!"
+                  color="info"
+                  variant="rounded"
+                  (click)="processAction(action)"
+               />
+            } @else {
+               <app-button
+                  [startIcon]="action.icon"
+                  [attr.data-action-command]="action.command"
+                  [color]="action.visibility == 'always' ? 'warning' : 'info'"
+                  [disabled]="isActionDisabled(action)"
+                  (click)="processAction(action)"
+                  >{{ action.title }}</app-button
+               >
+            }
+         }
+
+         <div class="relative">
+            <!-- More Button -->
+            <app-icon-button
+               icon="more_horiz"
+               color="info"
+               variant="rounded"
+               (click)="openMoreMenu(true)"
+            />
+
+            <app-menu [open]="showMoreMenu" (close)="openMoreMenu(false)">
+               @for (action of moreActions; track $index) {
+                  <app-menu-item
+                     [icon]="action.icon"
+                     (click)="processAction(action)"
+                     [label]="action.title!"
+                  />
+               }
+
+               <app-menu-item
+                  icon="tune"
+                  (click)="showPreferences(true)"
+                  [value]="1"
+                  label="Preferences"
+               />
+            </app-menu>
+         </div>
+      </div>
+   </div>
+</ng-template>

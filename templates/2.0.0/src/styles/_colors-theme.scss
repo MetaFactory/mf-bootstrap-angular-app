@@ -1,0 +1,45 @@
+:root {
+   --primary: #007bff;
+   --secondary: #6c757d;
+   --success: #28a745;
+   --info: #4eb4b8;
+   --warning: #ffc107;
+   --danger: #dc3545;
+   --light: #f8f9fa;
+   --dark: #343a40;
+
+   --brand-100: #e3f0fe; /* Lightest tint */
+   --brand-200: #bfdcfc; /* Light tint */
+   --brand-300: #98c8fb; /* Soft tint */
+   --brand-400: #70b3f9; /* Mid tint */
+   --brand-500: #5e9cee; /* Base color */
+   --brand-600: #4d88d4; /* Slightly darker */
+   --brand-700: #3b75ba; /* Mid shade */
+   --brand-800: #2a629f; /* Dark shade */
+   --brand-900: #1b4e85; /* Darker shade */
+   --brand-1000: #102b4f; /* Darkest */
+
+   --brand2-100: #300b13;
+   --brand2-200: #601626;
+   --brand2-300: #90213a;
+   --brand2-400: #c02c4d;
+   --brand2-500: #f03760;
+   --brand2-600: #d23054;
+   --brand2-700: #b42948;
+   --brand2-800: #96223c;
+   --brand2-900: #781c30;
+
+   --link-color: var(--blue-500);
+
+   //! Sidebar
+   --sidebar-bg-color: var(--gray-500);
+   --sidebar-color: var(--gray-200);
+   --sidebar-bg-color__hover: var(--gray-600);
+   --sidebar-color__hover: var(--gray-200);
+   --sidebar-bg-color__active: var(--gray-700);
+   --sidebar-color__active: var(--gray-200);
+   --sidebar-separator_color: var(--gray-400);
+
+   //! Data-table
+   --datatable-header: var(--gray-50);
+}

@@ -1,0 +1,16 @@
+<app-row [gap]="0" [attr.name]="name">
+   <app-icon-button color="info" icon="chevron_left" (click)="setValue(offset - 1)" />
+
+   <app-icon-button color="info" icon="chevron_right" (click)="setValue(offset + 1)" />
+
+   <div class="week-caption">
+      <mat-icon
+         *ngIf="value"
+         name="radio_button_unchecked"
+         color="orange-500"
+         [size]="19"
+         (click)="setValue(0)"
+      />
+      <span>{{ caption }}</span>
+   </div>
+</app-row>

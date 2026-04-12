@@ -1,0 +1,36 @@
+@if (field.type === 'IMAGE') {
+   <!-- Image -->
+   <img [src]="getFieldDisplayValue(record, field)" [alt]="field.name" />
+} @else if (field.type === 'JSON') {
+   <!-- JSON -->
+   <div [innerHTML]="getJsonFieldHtmlContent(record, field)"></div>
+} @else if (isLink(record, field)) {
+   <!-- Link -->
+   <span class="entity-field_link">
+      <mat-icon *ngIf="isExternalLink(record, field)" [name]="getLinkIcon(field)" />
+      <a
+         [href]="getLinkValue(record, field)"
+         [target]="getLinkTarget(record, field)"
+         (click)="handleLinkClick($event, record, field)"
+         >{{ getFieldDisplayValue(record, field) }}</a
+      >
+   </span>
+} @else if (getFieldIconValue(record, field) && field.type !== 'BOOLEAN') {
+   <!-- Icon -->
+   <mat-icon
+      [title]="getFieldDisplayValue(record, field)"
+      [name]="getFieldIconValue(record, field)!"
+   ></mat-icon>
+} @else if (field.multi) {
+   <!-- Array -->
+   <ul class="field-array-list">
+      @for (item of getEntityMultiFieldDisplayValues(record, field); track $index) {
+         <li>{{ item }}</li>
+      }
+   </ul>
+} @else if (field.isMarkdown) {
+   <!-- Markdown -->
+   <span class="markdown-html" [innerHTML]="getFieldDisplayValue(record, field) | markdown"></span>
+} @else {
+   <span>{{ getFieldDisplayValue(record, field) }}</span>
+}

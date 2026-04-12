@@ -1,0 +1,40 @@
+<div #inputRef class="app-input-date" [class.has-value]="hasValue" tabindex="0">
+   <input
+      [autofocus]
+      [attr.name]="name"
+      (click)="toggleTimePicker(true)"
+      (blur)="blurDateInput($event)"
+      (keydown.enter)="handleEnter($event)"
+      [placeholder]="placeholder || ''"
+      autocomplete="off"
+      [value]="value"
+   />
+   <i
+      *ngIf="!resetButton || !hasValue"
+      (click)="toggleTimePicker(true)"
+      class="material-symbols-outlined"
+      >schedule</i
+   >
+
+   <!-- Reset Button -->
+   <i
+      *ngIf="resetButton && hasValue"
+      class="reset-button material-symbols-outlined"
+      (click)="resetValues($event)"
+      >close</i
+   >
+</div>
+
+<app-popover
+   [maxWidth]="368"
+   [open]="isTimePickerVisible"
+   [anchorRect]="inputRect"
+   (close)="toggleTimePicker(false)"
+   [maxHeight]="368"
+>
+   <app-time-picker
+      [hidden]="!isTimePickerVisible"
+      [selectedTime]="value"
+      (onSelect)="handleSelect($event)"
+   />
+</app-popover>

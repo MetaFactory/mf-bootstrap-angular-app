@@ -1,0 +1,11 @@
+<div class="error-page">
+   <mat-icon name="error" color="danger" [size]="64"></mat-icon>
+   <h2>Oops! Something web wrong!</h2>
+   <p>Check your network connection. Still broken? Contact the admin!</p>
+   <br />
+
+   <app-row [gap]="1">
+      <app-button (click)="goBack()" color="info">Go Back</app-button>
+      <app-button href="/" variant="outlined" color="secondary">Home</app-button>
+   </app-row>
+</div>

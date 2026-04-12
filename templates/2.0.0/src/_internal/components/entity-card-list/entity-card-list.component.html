@@ -1,0 +1,34 @@
+<ul class="card-list" #list>
+   <li
+      [class.selected]="item.id == this.selectedItem?.id"
+      class="list-item"
+      tabindex="0"
+      *ngFor="let item of this.items"
+      (focus)="this.onSelectItem.emit(item)"
+   >
+      <div class="card">
+         <div
+            class="card-field"
+            *ngFor="let field of fields"
+            [attr.data-column-name]="field.name"
+            [attr.data-column-type]="field.type"
+            [attr.data-column-value]="getFieldSingleRawValue(item, field)"
+            (click)="field.url ? null : this.onSelectItem.emit(item)"
+         >
+            <app-entity-field-view [field]="field" [record]="item" />
+         </div>
+      </div>
+
+      <!-- Actions Container -->
+      <div class="actions-container" *ngIf="itemActions.length">
+         <app-icon-button
+            *ngFor="let action of itemActions"
+            size="lg"
+            [icon]="action.icon!"
+            [tooltip]="action.title"
+            [css]="action.css"
+            (click)="onItemAction.emit({ item, action })"
+         />
+      </div>
+   </li>
+</ul>

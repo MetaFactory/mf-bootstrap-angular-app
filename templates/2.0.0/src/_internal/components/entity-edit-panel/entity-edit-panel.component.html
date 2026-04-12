@@ -1,0 +1,97 @@
+<form [formGroup]="this.form">
+   <!-- Save / Cancel -->
+
+   <!-- Header -->
+   <header>
+      <h1>{{ title }}</h1>
+
+      <div class="button-group">
+         <app-button color="secondary" variant="outlined" (click)="onCancel.emit()"
+            >Cancel</app-button
+         >
+         <app-button
+            startIcon="save"
+            color="warning"
+            [disabled]="!this.form.valid || this.formActionState === 'Running'"
+            (click)="save()"
+            >{{ isNew ? 'Create' : 'Save' }}</app-button
+         >
+      </div>
+   </header>
+
+   <!-- Fields -->
+   @if (groupedFields.length > 1) {
+      @for (group of groupedFields; track group) {
+         <div class="entity-edit-group">
+            <h3 class="group-title">{{ group.name }}</h3>
+            <div class="entity-edit-panel_fields-container">
+               @for (field of group.fields; track $index) {
+                  <ng-container *ngTemplateOutlet="fieldTemplate; context: { $implicit: field }">
+                  </ng-container>
+               }
+            </div>
+         </div>
+      }
+   } @else {
+      <div class="entity-edit-group">
+         <div class="entity-edit-panel_fields-container">
+            <!-- Single group -->
+            @for (field of visibleFields; track $index) {
+               <ng-container
+                  *ngTemplateOutlet="fieldTemplate; context: { $implicit: field }"
+               ></ng-container>
+            }
+         </div>
+      </div>
+   }
+</form>
+
+<!-- Field -->
+<ng-template #fieldTemplate let-field>
+   <div
+      [class]="'entity-field' + (field.multiline ? ' multiline-text' : '')"
+      [attr.data-field]="field.name"
+   >
+      <!-- Label -->
+      <label [for]="field.name + '-input'">
+         <span>{{ getFieldTitle(field) }}</span>
+      </label>
+
+      <!-- Description -->
+      <div
+         [innerHtml]="getFieldDescription(field)"
+         *ngIf="field.description"
+         class="cmn-text-subtitle"
+      ></div>
+
+      @if (
+         (!isNew && field.editState === 'readonly') || (isNew && field.insertState === 'readonly')
+      ) {
+         <div class="entity-field_readonly-value" [class.multi-line]="field.multiline">
+            {{ getDisplayValue(field) }}
+         </div>
+      } @else {
+         <!-- Edit Component -->
+         <app-entity-field-edit
+            [field]="field"
+            [formGroup]="this.form"
+            (onOptionsSearch)="handleOptionsSearch({ field, search: $event })"
+            [hasError]="fieldHasError[field.name!]"
+            [errorText]="fieldErrorText[field.name!]"
+         />
+      }
+
+      <!-- Validation -->
+      @if (this.form.get(field.name!)?.errors?.['required']) {
+         <div class="validation-message">
+            The <strong>{{ getFieldTitle(field) }}</strong> field is required!
+         </div>
+      }
+      @if (this.form.get(field.name!)?.errors?.['pattern']) {
+         <div class="validation-message">
+            Please enter a valid <strong>{{ getFieldTitle(field) }}</strong
+            >!
+         </div>
+      }
+   </div>
+</ng-template>

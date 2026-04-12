@@ -1,0 +1,35 @@
+<ng-template #projectedContent>
+   @if (startIcon) {
+      <mat-icon [name]="startIcon" />
+   }
+
+   <span class="button_content">
+      <ng-content></ng-content>
+   </span>
+
+   @if (endIcon) {
+      <mat-icon [name]="endIcon" />
+   }
+</ng-template>
+
+<a
+   *ngIf="href; else buttonContent"
+   [href]="disabled ? undefined : href"
+   [target]="target"
+   role="button"
+   [class]="variant + ' ' + color"
+   [class.small]="size == 'sm'"
+>
+   <ng-container *ngTemplateOutlet="projectedContent"></ng-container>
+</a>
+
+<ng-template #buttonContent>
+   <button
+      [class]="variant + ' ' + color"
+      [disabled]="disabled"
+      [type]="type"
+      [class.small]="size == 'sm'"
+   >
+      <ng-container *ngTemplateOutlet="projectedContent"></ng-container>
+   </button>
+</ng-template>

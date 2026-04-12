@@ -1,0 +1,27 @@
+/* app-switch.component.scss */
+.switch {
+  width: 60px;
+  height: 34px;
+  background-color: #ccc;
+  border-radius: 34px;
+  position: relative;
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.switch.checked {
+  background-color: var(--brand-700);
+  .slider {
+    left: 28px;
+  }
+}

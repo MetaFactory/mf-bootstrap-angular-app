@@ -1,0 +1,41 @@
+:host ::ng-deep {
+   app-select button {
+      i {
+         color: var(--brand-600);
+      }
+
+      &.has-value {
+         background-color: var(--brand-700);
+         border-color: var(--brand-700);
+         color: var(--brand-100);
+
+         i {
+            color: var(--brand-100) !important;
+         }
+      }
+   }
+
+   app-input-date {
+      .has-value {
+         background-color: var(--brand-700);
+         border-color: var(--brand-700);
+         color: var(--brand-100);
+
+         i {
+            color: var(--brand-100) !important;
+         }
+      }
+   }
+
+   app-input-text {
+      .has-value {
+         background-color: var(--brand-700);
+         border-color: var(--brand-700);
+         color: var(--brand-100);
+
+         i {
+            color: var(--brand-100) !important;
+         }
+      }
+   }
+}

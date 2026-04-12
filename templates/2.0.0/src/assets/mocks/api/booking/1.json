@@ -1,0 +1,12 @@
+{
+   "id": 1,
+   "guestName": "John Doe",
+   "guestEmail": "john.doe@example.com",
+   "startTime": "2026-04-15T10:00:00Z",
+   "endTime": "2026-04-15T10:30:00Z",
+   "status": "CONFIRMED",
+   "statusDisplayValue": "BookingStatus.CONFIRMED",
+   "bookingPagePkId": 1,
+   "bookingPageDisplayValue": "30-Minute Meeting",
+   "notes": "Initial consultation"
+}

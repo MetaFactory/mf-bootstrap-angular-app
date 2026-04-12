@@ -1,0 +1,91 @@
+header {
+   transition:
+      background-color 0.5s,
+      border 0.5s;
+   background-color: white;
+   border-bottom: 1px solid var(--gray-200);
+   height: 100%;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   padding-inline-start: 1rem;
+   padding-inline-end: 1rem;
+   gap: 1rem;
+
+   img.user-badge {
+      border-radius: 50%;
+      display: inline-block;
+      height: 32px;
+      object-fit: cover;
+      vertical-align: middle;
+      width: 32px;
+      line-height: 32px;
+   }
+
+   img.brand {
+      height: 16px;
+   }
+
+   h1 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--gray-700);
+      flex: 1;
+   }
+}
+
+::ng-deep html.dark {
+   header.toolbar {
+      background-color: var(--gray-900);
+      border-bottom: 1px solid var(--gray-900);
+   }
+}
+
+.toolbar_account {
+   cursor: pointer;
+   i {
+      font-size: 36px;
+   }
+   & + app-popover {
+      ::ng-deep {
+         .app-popover {
+            right: 1rem;
+         }
+      }
+   }
+}
+
+.notification-button {
+   border: none;
+   background-color: transparent;
+   width: 42px;
+   height: 42px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   color: var(--gray-500);
+   position: relative;
+
+   &:hover {
+      background-color: var(--gray-100);
+   }
+
+   .notifications-count {
+      appearance: none;
+      border: none;
+      background-color: var(--red-500);
+      color: white;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      padding-inline: 6px;
+      border-radius: 50%;
+      display: inline-flex;
+      block-size: min-content;
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+   }
+}

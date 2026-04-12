@@ -1,0 +1,43 @@
+form {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+   max-width: 500px;
+}
+
+.entity-field {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+
+   .entity-field_readonly-value {
+      color: var(--brand-800);
+   }
+
+   &[hidden] {
+      display: none;
+   }
+
+   label {
+      font-size: 16px;
+      color: var(--gray-700);
+      font-weight: 500;
+      line-height: 20px;
+      box-sizing: border-box;
+   }
+
+   .form-field_description {
+      font-size: 11px;
+      color: var(--gray-500);
+   }
+}
+
+ul {
+   list-style: none;
+   padding: 0;
+}
+
+.validation-message {
+   color: var(--red-500);
+   font-size: small;
+}

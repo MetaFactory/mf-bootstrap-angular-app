@@ -1,0 +1,178 @@
+@use '../../styles/mixins' as *;
+
+.entity-panel {
+   @include no-mobile {
+      padding: 1rem 1rem 5rem 1rem;
+      min-width: min(400px, 100%);
+   }
+
+   @include mobile {
+      padding: 0.5rem 0.5rem 5rem 0.5rem;
+   }
+
+   .entity-panel_content {
+      .view-entity-panel {
+         overflow: auto;
+         height: 100%;
+
+         &.view-entity-panel_width_lg {
+            width: 1200px;
+            max-width: 1200px;
+         }
+
+         &.view-entity-panel_width_md {
+            width: 800px;
+            max-width: 800px;
+         }
+
+         &.view-entity-panel_width_sm {
+            width: 400px;
+            max-width: 400px;
+         }
+      }
+   }
+
+   &[data-view-template='multi-column'] {
+      display: flex;
+      flex-direction: column;
+
+      .entity-panel_content {
+         display: flex;
+
+         @include no-mobile {
+            flex-direction: row;
+            gap: 1rem;
+            overflow-x: auto;
+         }
+         @include mobile {
+            flex-direction: column;
+         }
+
+         .entity-view-container {
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            background-color: var(--gray-50);
+            padding: 1rem;
+         }
+
+         .view-entity-panel {
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            @include no-mobile {
+               padding-bottom: 5rem; // e.g. Acquisition Form
+            }
+            @include mobile {
+               padding-bottom: 1rem; // e.g. Acquisition Form
+            }
+         }
+      }
+   }
+
+   &[data-view-template='multi-tab'] {
+      .tabs {
+         position: sticky;
+         top: 0;
+         background-color: white;
+         z-index: var(--z-20);
+      }
+
+      .entity-panel_content {
+         .inner-title {
+            display: none;
+         }
+         position: relative;
+         height: 100%;
+         container-type: inline-size;
+         container-name: entity_view_container;
+      }
+   }
+
+   header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      gap: 0.5rem;
+
+      .overflow-hidden {
+         overflow: hidden;
+      }
+
+      h1,
+      h2 {
+         white-space: pre-wrap;
+         color: var(--gray-800);
+         font-weight: 300;
+
+         overflow: hidden;
+         text-overflow: ellipsis;
+         text-wrap: nowrap;
+      }
+
+      h2 {
+         line-height: 2rem;
+      }
+
+      h1 {
+         font-weight: 400;
+         line-height: 2rem;
+         margin: 0;
+      }
+
+      button.back-button {
+         padding: 12px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 50%;
+         background-color: transparent;
+         border: none;
+         cursor: pointer;
+         transition: background-color 0.2s ease-in-out;
+         &:hover {
+            background-color: var(--gray-100);
+         }
+      }
+
+      ::ng-deep {
+         .app-popover {
+            right: 1rem;
+         }
+      }
+   }
+
+   &.view-mode-edit {
+      background-color: var(--gray-50);
+      min-height: 100%;
+      padding: 0 1rem;
+   }
+}
+
+@container entity_view_container (min-width: 600px) {
+   .entity-view-container {
+      columns: 2;
+   }
+}
+
+@container entity_view_container (min-width: 1000px) {
+   .entity-view-container {
+      columns: 3;
+   }
+}
+
+::ng-deep html.dark {
+   .entity-view-container {
+      background-color: var(--gray-700) !important;
+      border: 1px solid var(--gray-600) !important;
+   }
+}
+
+.section-error-message {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   color: var(--red-500);
+   gap: 0.5rem;
+}

@@ -1,0 +1,14 @@
+<button
+   [class]="(css ?? '') + ' size-' + size"
+   [class.disabled]="disabled"
+   [title]="tooltip || ''"
+   [ngStyle]="{ backgroundColor: bgColor }"
+   (click)="onClick($event)"
+>
+   <mat-icon
+      [name]="icon"
+      [color]="color"
+      [size]="iconSize"
+      [ngStyle]="{ transform: rotate ? 'rotate(' + rotate + 'deg)' : undefined }"
+   />
+</button>
