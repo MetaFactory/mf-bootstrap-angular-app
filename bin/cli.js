@@ -42,7 +42,7 @@ function copyRecursive(src, dest) {
 
 function printUsage() {
   console.log(`
-Usage: create-mf-angular <target-path> [--version <version>]
+Usage: mf-create-angular <target-path> [--version <version>]
 
 Scaffold a new MFE project from a versioned template.
 

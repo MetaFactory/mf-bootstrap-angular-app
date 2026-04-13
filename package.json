@@ -1,9 +1,9 @@
 {
-  "name": "create-mf-angular",
+  "name": "mf-create-angular",
   "version": "1.0.0",
   "description": "CLI tool to scaffold Angular projects from versioned templates",
   "bin": {
-    "create-mf-angular": "./bin/cli.js"
+    "mf-create-angular": "./bin/cli.js"
   },
   "files": [
     "bin/",

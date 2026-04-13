@@ -1,4 +1,4 @@
-# create-mf-angular
+# mf-create-angular
 
 CLI tool to scaffold an Angular project from versioned templates.
 
@@ -19,7 +19,7 @@ node bin/cli.js <target-path>
 ## Usage
 
 ```
-create-mf-angular <target-path> [--version <version>]
+mf-create-angular <target-path> [--version <version>]
 ```
 
 ### Arguments
@@ -41,19 +41,19 @@ create-mf-angular <target-path> [--version <version>]
 Scaffold a project using the latest template version:
 
 ```bash
-create-mf-angular ./my-project
+mf-create-angular ./my-project
 ```
 
 Scaffold using a specific version:
 
 ```bash
-create-mf-angular ./my-project --version 2.0.0
+mf-create-angular ./my-project --version 2.0.0
 ```
 
 List available template versions:
 
 ```bash
-create-mf-angular --list
+mf-create-angular --list
 ```
 
 ## Adding a New Template Version
@@ -77,7 +77,7 @@ The CLI automatically discovers all version directories and sorts them by semver
 ## Project Structure
 
 ```
-create-mf-angular/
+mf-create-angular/
 ├── bin/
 │   └── cli.js          # CLI entry point
 ├── templates/
