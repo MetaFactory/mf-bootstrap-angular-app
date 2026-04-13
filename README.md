@@ -1,6 +1,6 @@
 # mf-bootstrap-angular-app
 
-CLI tool to scaffold an Angular project from versioned templates.
+CLI tool to bootstrap an Angular project from versioned templates.
 
 ## Installation
 
