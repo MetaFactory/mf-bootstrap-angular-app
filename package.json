@@ -1,9 +1,9 @@
 {
-  "name": "mf-create-angular",
+  "name": "mf-bootstrap-angular-app",
   "version": "1.0.0",
   "description": "CLI tool to scaffold Angular projects from versioned templates",
   "bin": {
-    "mf-create-angular": "./bin/cli.js"
+    "mf-bootstrap-angular-app": "./bin/cli.js"
   },
   "files": [
     "bin/",
