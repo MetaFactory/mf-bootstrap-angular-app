@@ -1,6 +1,6 @@
-# mfe-common-library
+# create-mf-angular
 
-CLI tool to scaffold MFE (Micro Frontend) projects from versioned templates.
+CLI tool to scaffold an Angular project from versioned templates.
 
 ## Installation
 
@@ -19,7 +19,7 @@ node bin/cli.js <target-path>
 ## Usage
 
 ```
-mfe-common-library <target-path> [--version <version>]
+create-mf-angular <target-path> [--version <version>]
 ```
 
 ### Arguments
@@ -41,19 +41,19 @@ mfe-common-library <target-path> [--version <version>]
 Scaffold a project using the latest template version:
 
 ```bash
-mfe-common-library ./my-project
+create-mf-angular ./my-project
 ```
 
 Scaffold using a specific version:
 
 ```bash
-mfe-common-library ./my-project --version 2.0.0
+create-mf-angular ./my-project --version 2.0.0
 ```
 
 List available template versions:
 
 ```bash
-mfe-common-library --list
+create-mf-angular --list
 ```
 
 ## Adding a New Template Version
@@ -77,7 +77,7 @@ The CLI automatically discovers all version directories and sorts them by semver
 ## Project Structure
 
 ```
-mfe-common-library/
+create-mf-angular/
 ├── bin/
 │   └── cli.js          # CLI entry point
 ├── templates/

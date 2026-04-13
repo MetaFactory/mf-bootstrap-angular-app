@@ -1,16 +1,16 @@
 {
-  "name": "mfe-common-library",
+  "name": "create-mf-angular",
   "version": "1.0.0",
-  "description": "CLI tool to scaffold MFE projects from versioned templates",
+  "description": "CLI tool to scaffold Angular projects from versioned templates",
   "bin": {
-    "mfe-common-library": "./bin/cli.js"
+    "create-mf-angular": "./bin/cli.js"
   },
   "files": [
     "bin/",
     "templates/"
   ],
   "keywords": [
-    "mfe",
+    "angular",
     "scaffold",
     "template",
     "cli"
